@@ -6,8 +6,10 @@ module.exports = {
     colors: {
       'byteware-base-red': '#ff2f23',
       'byteware-light-red': '#fb4a40',
-      'byteware-light-blue': '#009dff',
-      'byteware-white': '#FEFCFB',
+      'byteware-white': '#fefcfb',
+      'byteware-dark-gray': '#5f5f6c',
+      'byteware-light-gray': '#f7f7f7',
+      'byteware-border-gray': '#eeeeee',
     },
     fontFamily: {
       'poppins': ["'Poppins'", 'sans-serif'],

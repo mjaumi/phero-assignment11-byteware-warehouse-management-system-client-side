@@ -11,6 +11,7 @@ const Header = () => {
                 <div>
                     <nav className='font-semibold flex items-center'>
                         <p>Home</p>
+                        <p className='ml-5'>Blogs</p>
                         <button className='ml-5 bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>Log In</button>
                     </nav>
                 </div>
