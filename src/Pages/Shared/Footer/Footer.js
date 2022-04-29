@@ -36,7 +36,7 @@ const Footer = () => {
                     <h4 className='text-byteware-white font-medium tracking-widest text-lg text-left uppercase'>Stay Connected</h4>
                     <div className='mt-5 text-left'>
                         <h4 className='text-byteware-white text-lg'>Byteware Warehouse Ltd.</h4>
-                        <p className='mt-2 text-byteware-dark-gray'>14th floor, 28 Kazi Nazrul Islam Ave,Navana Zohura Square, Dhaka 1000</p>
+                        <p className='mt-2 text-byteware-dark-gray'>14th floor, Opposite to Rajarbag Police Telecom Bhaban, Motijheel,Dhaka 1000</p>
                         <h4 className='mt-5 text-byteware-dark-gray font-medium'>Email:</h4>
                         <h4 className='mt-2 text-byteware-base-red font-medium'>info.warehouse@byteware.com</h4>
                         <div className='mt-10'>
