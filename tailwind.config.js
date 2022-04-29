@@ -10,6 +10,7 @@ module.exports = {
       'byteware-dark-gray': '#5f5f6c',
       'byteware-light-gray': '#f7f7f7',
       'byteware-border-gray': '#eeeeee',
+      'byteware-footer-bg': '#1d2124',
     },
     fontFamily: {
       'poppins': ["'Poppins'", 'sans-serif'],
