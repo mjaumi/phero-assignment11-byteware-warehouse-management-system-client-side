@@ -3,8 +3,11 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect } from 'react';
 import PageTItle from '../Shared/PageTitle/PageTItle';
 import Item from '../Shared/Item/Item';
+import useItems from '../../hooks/useItems';
 
 const ManageInventory = () => {
+    //integration of custom hooks
+    const [items] = useItems();
 
     //scroll to the top on render
     useEffect(() => {
@@ -27,12 +30,9 @@ const ManageInventory = () => {
                     </div>
                 </div>
                 <div className='grid grid-cols-3 mt-10 mb-20 gap-10'>
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
+                    {
+                        items.map(item => <Item key={item._id} item={item} />)
+                    }
                 </div>
             </div>
         </section>

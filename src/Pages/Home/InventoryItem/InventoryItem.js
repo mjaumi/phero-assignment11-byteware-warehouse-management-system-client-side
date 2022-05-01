@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import dummy from '../../../images/dummy-laptop.jpg';
 
-const InventoryItem = () => {
+const InventoryItem = ({ item }) => {
+    //fetching data from props
+    const { _id, title, img, price, quantity, supplier, basicInfo } = item;
+
     //integration of react hooks
     const navigate = useNavigate();
 
@@ -15,24 +17,24 @@ const InventoryItem = () => {
 
     //rendering inventory item card here
     return (
-        <div className='bg-[#ffffff] p-5 rounded-2xl shadow-2xl'>
+        <div className='bg-white p-5 rounded-2xl shadow-2xl'>
             <div>
-                <img src={dummy} alt="" />
+                <img src={img} alt="" />
             </div>
-            <div>
-                <h4 className='text-left font-semibold'>ASUS VivoBook 15 X515EA Core i3 11th Gen 512GB SSD 15.6" IPS FHD Laptop</h4>
+            <div className='mt-5 grid grid-rows-byteware-item-card-layout'>
+                <h4 className='text-left font-semibold'>{title}</h4>
                 <div className='text-left text-byteware-dark-gray my-5 pb-7 border-b border-byteware-border-gray'>
-                    <small className='block mb-2'><li>Intel Core i3-1115G4 Processor (6M Cache, 3.00 GHz up to 4.10 GHz)</li></small>
-                    <small className='block mb-2'><li>4GB DDR4 RAM</li></small>
-                    <small className='block mb-2'><li>512GB PCI-E G3 SSD</li></small>
-                    <small className='block mb-2'><li>15.6" FHD LED Display</li></small>
+                    <small className='block mb-2'><li>{basicInfo.processor}</li></small>
+                    <small className='block mb-2'><li>{basicInfo.memory}</li></small>
+                    <small className='block mb-2'><li>{basicInfo.storage}</li></small>
+                    <small className='block mb-2'><li>{basicInfo.display}</li></small>
                 </div>
                 <div>
-                    <h3 className='font-semibold text-byteware-light-red text-2xl'>51,500৳</h3>
-                    <p className='text-byteware-dark-gray mt-5'>Quantity: 10</p>
-                    <p className='text-byteware-dark-gray'>Supplier: aumi</p>
+                    <h3 className='font-semibold text-byteware-light-red text-2xl'>৳{price}</h3>
+                    <p className='text-byteware-dark-gray mt-5'>Quantity: {quantity}</p>
+                    <p className='text-byteware-dark-gray'>Supplier: {supplier}</p>
                     <button
-                        onClick={() => handleUpdateStock(123)}
+                        onClick={() => handleUpdateStock(_id)}
                         className='mt-8 w-full bg-gradient-to-r from-byteware-base-red to-byteware-light-red py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
                         <FontAwesomeIcon icon={faUpload} className='mr-3' />
                         Update Stock

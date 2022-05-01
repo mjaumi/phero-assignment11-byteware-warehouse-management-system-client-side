@@ -20,6 +20,9 @@ module.exports = {
       dropShadow: {
         'byteware-btn-shadow': '0px 5px 15px rgba(255, 47, 35, 0.4)',
       },
+      gridTemplateRows: {
+        'byteware-item-card-layout': '50px 1fr 1fr',
+      }
     },
   },
   plugins: [],
