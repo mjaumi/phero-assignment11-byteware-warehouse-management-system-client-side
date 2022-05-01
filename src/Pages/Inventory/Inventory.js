@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PageTItle from '../Shared/PageTitle/PageTItle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTruckMoving, faWindowRestore, faWarehouse } from '@fortawesome/free-solid-svg-icons';
+import { faTruckMoving, faWindowRestore, faWarehouse, faMultiply, faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Inventory = () => {
     //integration of React hooks
     const [item, setItem] = useState({});
+    const [showDeliveredModal, setShowDeliveredModal] = useState(false);
+    const [showRestockModal, setShowRestockModal] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -15,6 +18,7 @@ const Inventory = () => {
         window.scrollTo(0, 0)
     }, []);
 
+    //fetching individual item details from database
     useEffect(() => {
         const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
         fetch(url)
@@ -22,11 +26,50 @@ const Inventory = () => {
             .then(data => setItem(data));
     }, [id]);
 
+    //event handler for restock item form
+    const handleRestockItem = event => {
+        event.preventDefault();
+        const quantity = parseInt(event.target.quantity.value);
+        if (!isNaN(quantity) && quantity > 0) {
+            updateQuantity(quantity);
+        } else {
+            toast('Invalid Input', {
+                position: 'bottom-right'
+            });
+        }
+        setShowRestockModal(false);
+        event.target.reset();
+    }
+
+    //updating the quantity of items when delivered and restocked
+    const updateQuantity = unit => {
+        const newQuantity = item.quantity + unit;
+        const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                quantity: newQuantity
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast('Updated Stock Successfully!!!', {
+                    position: 'bottom-right'
+                });
+                const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => setItem(data));
+            });
+    }
+
     //rendering inventory component here
     return (
         <section>
             <PageTItle title={'Inventory'} />
-            {console.log(item)}
             <div className='w-4/5 mx-auto pt-20'>
                 <div className='flex justify-between'>
                     <div>
@@ -55,7 +98,8 @@ const Inventory = () => {
                             </div>
                             <div className='my-12'>
                                 <button
-                                    className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                                    onClick={() => setShowDeliveredModal(true)}
+                                    className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed' disabled={item.quantity === 0}>
                                     <FontAwesomeIcon icon={faTruckMoving} className='mr-3' />
                                     Delivered
                                 </button>
@@ -304,15 +348,62 @@ const Inventory = () => {
                 </div>
                 <div className='mt-20 w-3/5 mx-auto bg-byteware-white p-5 rounded-2xl shadow-xl'>
                     <h3 className='font-bold text-2xl text-left pt-5 mb-5'>Restock The Item</h3>
-                    <form>
+                    <form onSubmit={handleRestockItem}>
                         <div className='mb-5'>
-                            <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-3 font-semibold' type="text" name='' placeholder='Enter Quantity' />
+                            <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-3 font-semibold' type="number" name='quantity' placeholder='Enter Quantity' required />
                         </div>
                         <button
+                            onClick={() => setShowRestockModal(true)}
+                            type='button'
                             className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
                             <FontAwesomeIcon icon={faWindowRestore} className='mr-3' />
                             Restock
                         </button>
+                        <div>
+                            {showRestockModal ? (
+                                <>
+                                    <div
+                                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                                    >
+                                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                                    <h3 className="text-3xl font-semibold">
+                                                        Are You Sure?
+                                                    </h3>
+                                                    <button
+                                                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-40 hover:opacity-100 duration-300 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                                        onClick={() => setShowRestockModal(false)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faMultiply} className='w-6 h-6' />
+                                                    </button>
+                                                </div>
+                                                <div className="relative p-6 flex-auto">
+                                                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                                        Are you sure that you want to restock this product?
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                                    <button
+                                                        onClick={() => setShowRestockModal(false)}
+                                                        className='bg-red-600 px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                                                        <FontAwesomeIcon icon={faBan} className='mr-3' />
+                                                        No
+                                                    </button>
+                                                    <button
+                                                        type='submit'
+                                                        className='ml-5 bg-green-800 px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                                                        <FontAwesomeIcon icon={faCheck} className='mr-3' />
+                                                        Yes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                                </>
+                            ) : null}
+                        </div>
                     </form>
                 </div>
                 <div className='mt-20'>
@@ -325,6 +416,54 @@ const Inventory = () => {
                 </div>
             </div>
 
+            <div>
+                {showDeliveredModal ? (
+                    <>
+                        <div
+                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                    <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                        <h3 className="text-3xl font-semibold">
+                                            Are You Sure?
+                                        </h3>
+                                        <button
+                                            className="p-1 ml-auto bg-transparent border-0 text-black opacity-40 hover:opacity-100 duration-300 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                            onClick={() => setShowDeliveredModal(false)}
+                                        >
+                                            <FontAwesomeIcon icon={faMultiply} className='w-6 h-6' />
+                                        </button>
+                                    </div>
+                                    <div className="relative p-6 flex-auto">
+                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                            Are you sure that the product has been successfully delivered?
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                            onClick={() => setShowDeliveredModal(false)}
+                                            className='bg-red-600 px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                                            <FontAwesomeIcon icon={faBan} className='mr-3' />
+                                            No
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                updateQuantity(-1);
+                                                setShowDeliveredModal(false);
+                                            }}
+                                            className='ml-5 bg-green-800 px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                                            <FontAwesomeIcon icon={faCheck} className='mr-3' />
+                                            Yes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                ) : null}
+            </div>
         </section>
     );
 };

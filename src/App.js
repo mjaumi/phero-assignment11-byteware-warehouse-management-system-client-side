@@ -8,6 +8,8 @@ import Footer from './Pages/Shared/Footer/Footer';
 import Inventory from './Pages/Inventory/Inventory';
 import ManageInventory from './Pages/ManageInventory/ManageInventory';
 import NotFound from './Pages/Shared/NotFound/NotFound';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
+      <ToastContainer position='bottom-right' />
     </main>
   );
 }
