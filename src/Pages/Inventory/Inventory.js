@@ -3,8 +3,11 @@ import PageTItle from '../Shared/PageTitle/PageTItle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruckMoving, faWindowRestore, faWarehouse } from '@fortawesome/free-solid-svg-icons';
 import dummy from '../../images/dummy-laptop.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Inventory = () => {
+    //integration of React hooks
+    const navigate = useNavigate();
 
     //scroll to the top on render
     useEffect(() => {
@@ -296,6 +299,7 @@ const Inventory = () => {
                 </div>
                 <div className='mt-20'>
                     <button
+                        onClick={() => navigate('/manageInventory')}
                         className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
                         <FontAwesomeIcon icon={faWarehouse} className='mr-3' />
                         Manage Inventories

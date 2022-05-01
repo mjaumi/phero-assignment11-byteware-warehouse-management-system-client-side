@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -19,6 +21,7 @@ const Header = () => {
                         <button
                             onClick={() => navigate('/login')}
                             className='ml-5 bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                            <FontAwesomeIcon icon={faUser} className='mr-3' />
                             Log In
                         </button>
                     </nav>

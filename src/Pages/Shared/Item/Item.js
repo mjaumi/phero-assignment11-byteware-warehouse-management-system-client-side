@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import dummy from '../../../images/dummy-laptop.jpg';
 
-const InventoryItem = () => {
+const Item = () => {
     //integration of react hooks
     const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const InventoryItem = () => {
         navigate(`/inventory/${id}`);
     }
 
-    //rendering inventory item card here
+    //rendering manage inventory item component here
     return (
         <div className='bg-[#ffffff] p-5 rounded-2xl shadow-2xl'>
             <div>
@@ -31,16 +31,23 @@ const InventoryItem = () => {
                     <h3 className='font-semibold text-byteware-light-red text-2xl'>51,500৳</h3>
                     <p className='text-byteware-dark-gray mt-5'>Quantity: 10</p>
                     <p className='text-byteware-dark-gray'>Supplier: aumi</p>
-                    <button
-                        onClick={() => handleUpdateStock(123)}
-                        className='mt-8 w-full bg-gradient-to-r from-byteware-base-red to-byteware-light-red py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
-                        <FontAwesomeIcon icon={faUpload} className='mr-3' />
-                        Update Stock
-                    </button>
+                    <div className='flex'>
+                        <button
+                            onClick={() => handleUpdateStock(123)}
+                            className='mt-8 w-full bg-gradient-to-r from-byteware-base-red to-byteware-light-red py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                            <FontAwesomeIcon icon={faUpload} className='mr-3' />
+                            Update Stock
+                        </button>
+                        <button
+                            onClick={() => handleUpdateStock(123)}
+                            className='ml-10 mt-8 w-2/6 bg-[#e31919] py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                            <FontAwesomeIcon icon={faTrashCan} />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default InventoryItem;
+export default Item;
