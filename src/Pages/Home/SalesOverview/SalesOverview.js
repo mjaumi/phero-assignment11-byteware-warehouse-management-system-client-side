@@ -1,7 +1,7 @@
 import React from 'react';
 import { EmojiHappyIcon, CurrencyBangladeshiIcon } from '@heroicons/react/outline';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLaptop } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 
 const SalesOverview = () => {
     //rendering sales overview component here

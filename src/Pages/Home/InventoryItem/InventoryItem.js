@@ -1,7 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import dummy from '../../../images/dummy-laptop.jpg';
 
 const InventoryItem = () => {
+    //integration of react hooks
+    const navigate = useNavigate();
+
+    const handleUpdateStock = id => {
+        navigate(`/inventory/${id}`);
+    }
+
+    //rendering inventory item card here
     return (
         <div className='bg-byteware-white p-5 rounded-2xl shadow-2xl'>
             <div>
@@ -19,7 +28,11 @@ const InventoryItem = () => {
                     <h3 className='font-semibold text-byteware-light-red text-2xl'>51,500৳</h3>
                     <p className='text-byteware-dark-gray mt-5'>Quantity: 10</p>
                     <p className='text-byteware-dark-gray'>Supplier: aumi</p>
-                    <button className='mt-8 w-full bg-gradient-to-r from-byteware-base-red to-byteware-light-red py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>Update Stock</button>
+                    <button
+                        onClick={() => handleUpdateStock(123)}
+                        className='mt-8 w-full bg-gradient-to-r from-byteware-base-red to-byteware-light-red py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                        Update Stock
+                    </button>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ const Header = () => {
 
     //rendering header component here
     return (
-        <header className='bg-byteware-base-blue py-5 shadow-lg'>
+        <header className='bg-byteware-white py-5 shadow-lg sticky top-0 z-50'>
             <div className='w-4/5 mx-auto flex justify-between items-center'>
                 <div>
                     <h1><span className='text-4xl font-extrabold'>Byte</span>ware</h1>
