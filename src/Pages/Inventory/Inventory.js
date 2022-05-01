@@ -1,48 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageTItle from '../Shared/PageTitle/PageTItle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruckMoving, faWindowRestore, faWarehouse } from '@fortawesome/free-solid-svg-icons';
-import dummy from '../../images/dummy-laptop.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Inventory = () => {
     //integration of React hooks
+    const [item, setItem] = useState({});
     const navigate = useNavigate();
+    const { id } = useParams();
 
     //scroll to the top on render
     useEffect(() => {
         window.scrollTo(0, 0)
     }, []);
 
+    useEffect(() => {
+        const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setItem(data));
+    }, [id]);
+
     //rendering inventory component here
     return (
         <section>
             <PageTItle title={'Inventory'} />
+            {console.log(item)}
             <div className='w-4/5 mx-auto pt-20'>
                 <div className='flex justify-between'>
                     <div>
-                        <img src={dummy} alt="" />
+                        <img src={item?.img} alt="" />
                     </div>
                     <div className='flex-1 text-left ml-32'>
-                        <h2 className='font-bold text-2xl'>ASUS VivoBook 15 X515EA Core i3 11th Gen 15.6" FHD Laptop</h2>
+                        <h2 className='font-bold text-2xl'>{item?.title}</h2>
                         <div className='flex mt-5'>
-                            <h5 className='bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Product ID: <span className='font-bold text-[#000000]'>123</span></h5>
-                            <h5 className='ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Brand: <span className='font-bold text-[#000000]'>Asus</span></h5>
-                            <h5 className='ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Status: <span className='font-bold text-[#007812]'>In Stock</span></h5>
+                            <h5 className='bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Product ID: <span className='font-bold text-[#000000]'>{item?._id}</span></h5>
+                            <h5 className='ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Brand: <span className='font-bold text-[#000000]'>{item?.brand}</span></h5>
+                            <h5 className='ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Status: <span className={`font-bold ${item?.quantity > 0 ? 'text-[#007812]' : 'text-red-600'}`}>{item?.quantity > 0 ? 'In Stock' : 'Out of Stock'}</span></h5>
                         </div>
                         <div className='mt-10'>
-                            <h3 className='font-extrabold text-3xl text-byteware-light-red'>৳50,500</h3>
+                            <h3 className='font-extrabold text-3xl text-byteware-light-red'>৳{item?.price}</h3>
                         </div>
                         <div className='mt-10'>
                             <h3 className='font-bold text-lg'>Key Features</h3>
                             <div className='mt-4'>
-                                <p className='text-byteware-dark-gray'>Model: <span className='text-[#000000]'>VivoBook 15 X515EA</span></p>
-                                <p className='mt-2 text-byteware-dark-gray'>Processor: <span className='text-[#000000]'>Intel Core i3-1115G4 (6M Cache, 3.00 GHz up to 4.10 GHz)</span></p>
-                                <p className='mt-2 text-byteware-dark-gray'>Memory: <span className='text-[#000000]'>4GB DDR4 RAM (Onboard)</span></p>
-                                <p className='mt-2 text-byteware-dark-gray'>Storage: <span className='text-[#000000]'>1TB HDD</span></p>
-                                <p className='mt-2 text-byteware-dark-gray'>Display: <span className='text-[#000000]'>15.6" FHD (1920X1080)</span></p>
-                                <p className='mt-2 text-byteware-dark-gray'>Quantity: <span className='text-[#000000]'>10</span></p>
-                                <p className='mt-2 text-byteware-dark-gray'>Supplier: <span className='text-[#000000]'>Aumi</span></p>
+                                <p className='text-byteware-dark-gray'>Model: <span className='text-[#000000]'>{item?.model}</span></p>
+                                <p className='mt-2 text-byteware-dark-gray'>Processor: <span className='text-[#000000]'>{item?.basicInfo?.processor}</span></p>
+                                <p className='mt-2 text-byteware-dark-gray'>Memory: <span className='text-[#000000]'>{item?.basicInfo?.memory}</span></p>
+                                <p className='mt-2 text-byteware-dark-gray'>Storage: <span className='text-[#000000]'>{item?.basicInfo?.storage}</span></p>
+                                <p className='mt-2 text-byteware-dark-gray'>Display: <span className='text-[#000000]'>{item?.basicInfo?.display}</span></p>
+                                <p className='mt-2 text-byteware-dark-gray'>Quantity: <span className='text-[#000000]'>{item?.quantity}</span></p>
+                                <p className='mt-2 text-byteware-dark-gray'>Supplier: <span className='text-[#000000]'>{item?.supplier}</span></p>
                             </div>
                             <div className='my-12'>
                                 <button
@@ -69,55 +78,55 @@ const Inventory = () => {
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Processor</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Intel Core i3-1115G4 Processor (6M Cache, 3.00 GHz up to 4.10 GHz)
+                                                        {item?.basicInfo?.processor}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Display</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        15.6-inch, FHD (1920 x 1080)
+                                                        {item?.basicInfo?.display}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Memory</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        4GB DDR4 3200MHz RAM (Onboard)
+                                                        {item?.basicInfo?.memory}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Storage</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        1TB HDD WITH FTPM
+                                                        {item?.basicInfo?.storage}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Graphics</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Intel UHD Graphics
+                                                        {item?.basicInfo?.graphics}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Operating System</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Windows 11 Home
+                                                        {item?.basicInfo?.os}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Battery</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        37WHrs, 2S1P, 2-cell Li-ion
+                                                        {item?.basicInfo?.battery}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Adapter</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        45W AC Adapter
+                                                        {item?.basicInfo?.adapter}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Audio</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        SonicMaster
+                                                        {item?.basicInfo?.audio ? item.basicInfo.audio : 'N/A'}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -138,19 +147,19 @@ const Inventory = () => {
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Keyboard</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Chiclet Keyboard with Num-key
+                                                        {item?.inputDevices?.keyboard}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">WebCam</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        VGA camera without privacy shutter
+                                                        {item?.inputDevices?.webcam}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Card Reader</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Micro SD card reader
+                                                        {item?.inputDevices?.cardReader ? item?.inputDevices?.cardReader : 'N/A'}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -171,13 +180,13 @@ const Inventory = () => {
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Wi-Fi</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Wi-Fi 5(802.11ac)
+                                                        {item?.network?.wifi}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Bluetooth</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        Bluetooth 4.1 (Dual-band)
+                                                        {item?.network?.bluetooth}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -190,7 +199,7 @@ const Inventory = () => {
                     <div className='mt-5'>
                         <h4 className='font-bold text-lg text-left text-byteware-light-red bg-byteware-light-red/20 px-5 py-3 rounded-xl'>Ports, Connectors & Slots</h4>
                         <div className="flex flex-col">
-                            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div className="overflow-x-hidden sm:-mx-6 lg:-mx-8">
                                 <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                                     <div className="overflow-hidden">
                                         <table className="min-w-full">
@@ -198,21 +207,37 @@ const Inventory = () => {
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">USB (s)</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        <p>1x USB 3.2 Gen 1 Type-A</p>
-                                                        <p>1x USB 3.2 Gen 1 Type-C</p>
-                                                        <p>2x USB 2.0 Type-A</p>
+                                                        {item?.ports?.usb}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">HDMI</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        1x HDMI 1.4
+                                                        {item?.ports?.hdmi}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Audio Jack Combo</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        1x 3.5mm Combo Audio Jack
+                                                        {item?.ports?.audioJack}
+                                                    </td>
+                                                </tr>
+                                                <tr className="border-b border-[#ECEDEF]">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Extra RAM Slot</td>
+                                                    <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
+                                                        {item?.ports?.extraRamSlot ? item?.ports?.extraRamSlot : 'N/A'}
+                                                    </td>
+                                                </tr>
+                                                <tr className="border-b border-[#ECEDEF]">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Extra M.2 Slot</td>
+                                                    <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
+                                                        {item?.ports?.extraM2Slot ? item?.ports?.extraM2Slot : 'N/A'}
+                                                    </td>
+                                                </tr>
+                                                <tr className="border-b border-[#ECEDEF]">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Supported SSD Type</td>
+                                                    <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
+                                                        {item?.ports?.ssdType ? item?.ports?.ssdType : 'N/A'}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -233,26 +258,19 @@ const Inventory = () => {
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Dimensions (W x D x H)</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        36.02 x 23.49 x 1.99 ~ 1.99 cm (14.18" x 9.25" x 0.78" ~ 0.78")
+                                                        {item?.physical?.dimensions}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Weight</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        1.80 kg (3.97 lbs)
+                                                        {item?.physical?.weight}
                                                     </td>
                                                 </tr>
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Color(s)</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        <p>PEACOCK BLUE (BQ2315W-X515EA)</p>
-                                                        <p>TRANSPARENT SILVER (BQ2311W-X515EA)</p>
-                                                    </td>
-                                                </tr>
-                                                <tr className="border-b border-[#ECEDEF]">
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Body Material</td>
-                                                    <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        ABS Plastic
+                                                        {item?.physical?.color ? item?.physical?.color : 'N/A'}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -273,7 +291,7 @@ const Inventory = () => {
                                                 <tr className="border-b border-[#ECEDEF]">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-byteware-dark-gray w-[20%] text-left">Manufacturing Warranty</td>
                                                     <td className="text-sm px-6 py-4 whitespace-nowrap text-left">
-                                                        02 years International Limited Warranty (Battery 1 year)
+                                                        {item?.warranty}
                                                     </td>
                                                 </tr>
                                             </tbody>
