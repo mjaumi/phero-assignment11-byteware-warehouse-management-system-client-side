@@ -7,6 +7,7 @@ import Signup from './Pages/Login/Signup/Signup';
 import Footer from './Pages/Shared/Footer/Footer';
 import Inventory from './Pages/Inventory/Inventory';
 import ManageInventory from './Pages/ManageInventory/ManageInventory';
+import NotFound from './Pages/Shared/NotFound/NotFound';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/inventory/:id' element={<Inventory />} />
         <Route path='/manageInventory' element={<ManageInventory />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
     </main>
