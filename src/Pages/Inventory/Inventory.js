@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import PageTItle from '../Shared/PageTitle/PageTItle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruckMoving, faWindowRestore, faWarehouse, faMultiply, faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from 'react';
+import PageTItle from '../Shared/PageTitle/PageTItle';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -44,7 +44,7 @@ const Inventory = () => {
     //updating the quantity of items when delivered and restocked
     const updateQuantity = unit => {
         const newQuantity = item.quantity + unit;
-        const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
+        const url = `https://guarded-cove-25404.herokuapp.com/updateItem/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

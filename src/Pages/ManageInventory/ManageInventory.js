@@ -4,15 +4,32 @@ import React, { useEffect } from 'react';
 import PageTItle from '../Shared/PageTitle/PageTItle';
 import Item from '../Shared/Item/Item';
 import useItems from '../../hooks/useItems';
+import { toast } from 'react-toastify';
 
 const ManageInventory = () => {
     //integration of custom hooks
-    const [items] = useItems();
+    const [items, setItems] = useItems();
 
     //scroll to the top on render
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
     }, []);
+
+    //event handler for delete item button sent through props
+    const handleDeleteItem = id => {
+        const url = `https://guarded-cove-25404.herokuapp.com/deleteItem/${id}`;
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast('Successfully Deleted Item!!!', {
+                    position: 'bottom-right'
+                });
+                const remainingItems = items.filter(item => item._id !== id);
+                setItems(remainingItems);
+            });
+    }
 
     //rendering manage inventory component here
     return (
@@ -31,7 +48,10 @@ const ManageInventory = () => {
                 </div>
                 <div className='grid grid-cols-3 mt-10 mb-20 gap-10'>
                     {
-                        items.map(item => <Item key={item._id} item={item} />)
+                        items.map(item => <Item
+                            key={item._id}
+                            item={item}
+                            handleDeleteItem={handleDeleteItem} />)
                     }
                 </div>
             </div>
