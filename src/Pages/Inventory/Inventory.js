@@ -15,7 +15,7 @@ const Inventory = () => {
 
     //scroll to the top on render
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
     }, []);
 
     //fetching individual item details from database
@@ -39,6 +39,7 @@ const Inventory = () => {
         }
         setShowRestockModal(false);
         event.target.reset();
+        window.scrollTo(0, 0);
     }
 
     //updating the quantity of items when delivered and restocked
@@ -56,13 +57,14 @@ const Inventory = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast('Updated Stock Successfully!!!', {
-                    position: 'bottom-right'
-                });
                 const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
                 fetch(url)
                     .then(res => res.json())
                     .then(data => setItem(data));
+
+                toast('Updated Stock Successfully!!!', {
+                    position: 'bottom-right'
+                });
             });
     }
 

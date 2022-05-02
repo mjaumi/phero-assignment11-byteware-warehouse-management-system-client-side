@@ -7,6 +7,7 @@
         "price": 71500,
         "quantity": 10,
         "supplier": "Aumi",
+        "supplierEmail": "mjaumi2864@gmail.com",
         "basicInfo": {
             "processor": "Intel Core i5-1135G7 Processor (8M Cache, 2.40 GHz up to 4.20 GHz)",
             "display": "14\" FHD (1920x1080), 35.56 cm display with IPS (In-Plane Switching) technology",
@@ -51,6 +52,7 @@
         "price": 73000,
         "quantity": 20,
         "supplier": "Milhan",
+        "supplierEmail": "mjaumi54321@gmail.com",
         "basicInfo": {
             "processor": "Intel Core i5-1135G7 Processor (8M Cache, 2.40 GHz up to 4.20 GHz)",
             "display": "15.6-inch, FHD (1920 x 1080) 16:9, Anti-glare display, LED Backlit, 250nits, NTSC: 45%, Screen-to-body ratio: 84 % IPS Display",
@@ -95,6 +97,7 @@
         "price": 79500,
         "quantity": 8,
         "supplier": "Milhan",
+        "supplierEmail": "mjaumi54321@gmail.com",
         "basicInfo": {
             "processor": "AMD Ryzen 7 5700U (Base 1.8GHz up to Up to 4.3GHz) Processor",
             "display": "15.6-inch FHD (1920 x 1080) Anti-Glare LED Backlight Non-Touch Narrow Border WVA Display",
@@ -138,7 +141,8 @@
         "model": "ThinkPad E14",
         "price": 66000,
         "quantity": 12,
-        "supplier": "Aumi",
+        "supplier": "Milhan",
+        "supplierEmail": "mjaumi54321@gmail.com",
         "basicInfo": {
             "processor": "Intel Core i3-1115G4 Processor (6M Cache, 3.00 GHz up to 4.10 GHz)",
             "display": "14\" IPS FHD ( 1920 x 1080) Display",
@@ -183,6 +187,7 @@
         "price": 50500,
         "quantity": 9,
         "supplier": "Aumi",
+        "supplierEmail": "mjaumi2864@gmail.com",
         "basicInfo": {
             "processor": "AMD Ryzen 3 3250U processor(2.6 Ghz up to 3.5 Ghz)",
             "display": "15.6\" (16:9) LED-backlit FHD (1920x1080) 60Hz Display",
@@ -227,6 +232,7 @@
         "price": 95550,
         "quantity": 5,
         "supplier": "Aumi",
+        "supplierEmail": "mjaumi2864@gmail.com",
         "basicInfo": {
             "processor": "Intel Core i5-1155G7 (8M Cache, 2.50 GHz up to 4.50 GHz) Processor",
             "display": "14.0-inch FHD (1920 x 1080) Truelife Touch Narrow Border WVA Display",
@@ -271,6 +277,7 @@
         "price": 105000,
         "quantity": 13,
         "supplier": "Aumi",
+        "supplierEmail": "mjaumi2864@gmail.com",
         "basicInfo": {
             "processor": "Intel Core i5-11400H Processor (12M Cache, 2.70 GHz up to 4.50 GHz)",
             "display": "15.6 Inch Full HD (1920x1080) IPS Display, 144HZ, NTAG (IPS) + 16:9 AR ; Viewing angle (H x V) 170/160",
