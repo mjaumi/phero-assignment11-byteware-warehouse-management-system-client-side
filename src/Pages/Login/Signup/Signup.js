@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import { Link } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -33,6 +33,11 @@ const Signup = () => {
         });
         setShowToast(true);
     }
+
+    //scroll to the top on render
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     //event handler for sign up
     const handleSignup = async (event) => {

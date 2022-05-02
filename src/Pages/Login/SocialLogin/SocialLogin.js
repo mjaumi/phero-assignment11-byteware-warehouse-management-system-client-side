@@ -3,13 +3,16 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import React from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
+import { toast } from 'react-toastify';
 
 const SocialLogin = () => {
     //integration of React Firebase hooks here
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
     if (user) {
-
+        toast('LogIn Successful!!!', {
+            position: 'bottom-right'
+        });
     }
 
     if (loading) {
