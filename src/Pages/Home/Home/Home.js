@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import PageTItle from '../../Shared/PageTitle/PageTItle';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
 import Banner from '../Banner/Banner';
 import FeaturedBrands from '../FeaturedBrands/FeaturedBrands';
 import InventoryItems from '../InventoryItems/InventoryItems';
@@ -15,7 +15,7 @@ const Home = () => {
     //rendering home component here
     return (
         <section>
-            <PageTItle title={'Home'} />
+            <PageTitle title={'Home'} />
             <Banner />
             <InventoryItems />
             <FeaturedBrands />

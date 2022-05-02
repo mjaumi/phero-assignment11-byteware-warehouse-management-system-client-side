@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruckMoving, faWindowRestore, faWarehouse, faMultiply, faCheck, faBan } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
-import PageTItle from '../Shared/PageTitle/PageTItle';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -71,7 +71,7 @@ const Inventory = () => {
     //rendering inventory component here
     return (
         <section>
-            <PageTItle title={'Inventory'} />
+            <PageTitle title={'Inventory'} />
             <div className='w-4/5 mx-auto pt-20'>
                 <div className='flex justify-between'>
                     <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const PageTItle = ({ title }) => {
+const PageTitle = ({ title }) => {
     return (
         <Helmet>
             <title>{title} | ByteWare Warehouse Management System</title>
@@ -9,4 +9,4 @@ const PageTItle = ({ title }) => {
     );
 };
 
-export default PageTItle;
+export default PageTitle;

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import PageTItle from '../PageTitle/PageTItle';
+import PageTitle from '../PageTitle/PageTitle';
 import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
@@ -11,7 +11,7 @@ const NotFound = () => {
     //rendering page not found component here
     return (
         <section>
-            <PageTItle title={'404 Page Not Found'} />
+            <PageTitle title={'404 Page Not Found'} />
             <div className='min-h-[70vh] flex flex-col justify-center items-center'>
                 <h1 className='font-black text-8xl text-byteware-base-red'>404</h1>
                 <h4 className='mt-5 font-semibold text-3xl'>Page Not Found!</h4>

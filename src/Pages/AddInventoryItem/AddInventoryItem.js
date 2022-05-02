@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faMultiply, faBan, faCheck } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const AddInventoryItem = () => {
     //integration of React hooks
@@ -113,6 +114,7 @@ const AddInventoryItem = () => {
     //rendering add inventory item component here
     return (
         <section className='py-20 bg-byteware-light-gray'>
+            <PageTitle title={'Add Inventory Item'} />
             <div className='w-4/5 mx-auto'>
                 <h3 className='text-left font-semibold text-4xl mb-10'>Add Inventory Item</h3>
                 <div className='bg-white px-10 py-5 shadow-2xl rounded-xl my-10'>

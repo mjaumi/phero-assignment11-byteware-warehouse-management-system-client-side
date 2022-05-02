@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect } from 'react';
-import PageTItle from '../Shared/PageTitle/PageTItle';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 import Item from '../Shared/Item/Item';
 import useItems from '../../hooks/useItems';
 import { toast } from 'react-toastify';
@@ -38,7 +38,7 @@ const ManageInventory = () => {
     //rendering manage inventory component here
     return (
         <section>
-            <PageTItle title={'Manage Inventory'} />
+            <PageTitle title={'Manage Inventory'} />
             <div className='w-4/5 mx-auto'>
                 <div className='flex justify-between'>
                     <h3 className='text-left font-semibold text-4xl my-10'>Inventory Items</h3>
