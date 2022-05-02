@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import { Link } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 
@@ -16,8 +16,11 @@ const Login = () => {
         loading,
         logInError,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
 
+    //integration of React hooks here
     const [showToast, setShowToast] = useState(false);
+    const emailRef = useRef();
 
     //showing login successful toast
     if (user && !showToast) {
@@ -27,7 +30,7 @@ const Login = () => {
         setShowToast(true);
     }
 
-    if (loading) {
+    if (loading || sending) {
 
     }
 
@@ -47,6 +50,19 @@ const Login = () => {
         window.scrollTo(0, 0);
     }
 
+    const handleResetPassword = async () => {
+        if (emailRef.current.value) {
+            await sendPasswordResetEmail(emailRef.current.value);
+            toast('Password Reset Email Has Been Sent!!!', {
+                position: 'bottom-right'
+            });
+        } else {
+            toast('Please, Insert Your Email.', {
+                position: 'bottom-right'
+            });
+        }
+    }
+
     //rendering the log in component here
     return (
         <section className='bg-byteware-light-gray'>
@@ -60,7 +76,7 @@ const Login = () => {
                         </div>
                         <div className='mb-5 text-left'>
                             <label className='ml-2 text-lg' htmlFor="email">Email<span className='font-bold text-red-600 text-xl'>*</span></label>
-                            <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="email" name='email' placeholder='Enter Your Email' required autoComplete='off' />
+                            <input ref={emailRef} className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="email" name='email' placeholder='Enter Your Email' required autoComplete='off' />
                         </div>
                         <div className='mb-2 text-left'>
                             <label className='ml-2 text-lg' htmlFor="password">Password<span className='font-bold text-red-600 text-xl'>*</span></label>
@@ -68,9 +84,13 @@ const Login = () => {
                         </div>
                         <div>
                             <p className='text-red-600'>{logInError && 'Invalid Email Or Password'}</p>
+                            <p className='text-red-600'>{passwordResetError && 'Failed To Reset The Password'}</p>
                         </div>
                         <div className='flex justify-end'>
-                            <button className='text-byteware-light-red underline hover:opacity-40 duration-300'>Forgot Password?</button>
+                            <button
+                                onClick={handleResetPassword}
+                                type='button'
+                                className='text-byteware-light-red underline hover:opacity-40 duration-300'>Forgot Password?</button>
                         </div>
                         <div className='mt-10 mb-2'>
                             <button
