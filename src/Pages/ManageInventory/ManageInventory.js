@@ -1,17 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import Item from '../Shared/Item/Item';
 import useItems from '../../hooks/useItems';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Shared/Loading/Loading';
 
 const ManageInventory = () => {
     //integration of custom hooks
     const [items, setItems] = useItems();
 
     //integration of React hooks
+    const [showLoading, setShowLoading] = useState(false);
     const navigate = useNavigate();
 
     //scroll to the top on render
@@ -21,6 +23,8 @@ const ManageInventory = () => {
 
     //event handler for delete item button sent through props
     const handleDeleteItem = id => {
+
+        setShowLoading(true);
         const url = `https://guarded-cove-25404.herokuapp.com/deleteItem/${id}`;
         fetch(url, {
             method: 'DELETE'
@@ -32,6 +36,7 @@ const ManageInventory = () => {
                 });
                 const remainingItems = items.filter(item => item._id !== id);
                 setItems(remainingItems);
+                setShowLoading(false);
             });
     }
 
@@ -51,14 +56,36 @@ const ManageInventory = () => {
                         </button>
                     </div>
                 </div>
-                <div className='grid grid-cols-3 mt-10 mb-20 gap-10'>
-                    {
-                        items.map(item => <Item
-                            key={item._id}
-                            item={item}
-                            handleDeleteItem={handleDeleteItem} />)
-                    }
-                </div>
+                {
+                    items.length === 0 ?
+                        <div className='h-[80vh] flex items-center justify-center'>
+                            <Loading />
+                        </div>
+                        :
+                        <div className='grid grid-cols-3 mt-10 mb-20 gap-10'>
+                            {
+                                items.map(item => <Item
+                                    key={item._id}
+                                    item={item}
+                                    handleDeleteItem={handleDeleteItem} />)
+                            }
+                        </div>
+                }
+            </div>
+            <div>
+                {
+                    showLoading &&
+                    <>
+                        <div
+                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                <Loading />
+                            </div>
+                        </div>
+                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                }
             </div>
         </section>
     );

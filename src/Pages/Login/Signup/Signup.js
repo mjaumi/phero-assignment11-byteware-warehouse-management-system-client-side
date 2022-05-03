@@ -2,11 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
+import Loading from '../../Shared/Loading/Loading';
 
 const Signup = () => {
     //integration of React Firebase hooks here
@@ -22,16 +23,32 @@ const Signup = () => {
     //integration of React hooks here
     const [errorMsg, setErrorMsg] = useState('');
     const [showToast, setShowToast] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     if (loading || updating || sending) {
 
     }
 
+    useEffect(() => {
+        if (creationError || updatingError || verificationError) {
+            setErrorMsg('Failed to Create User. Please, Try Again.');
+            setShowLoading(false);
+        }
+    }, [creationError, updatingError, verificationError]);
+
     if (user && !showToast) {
         toast('User Created Successfully!!!', {
             position: 'bottom-right'
         });
+        toast('A Verification Email Is Sent. Please, Check Your Email.', {
+            position: 'bottom-right'
+        });
         setShowToast(true);
+        navigate(from, { replace: true });
     }
 
     //scroll to the top on render
@@ -48,16 +65,14 @@ const Signup = () => {
         const confirmPassword = event.target.confirmPassword.value;
 
         if (password === confirmPassword) {
+            setShowLoading(true);
             await createUserWithEmailAndPassword(email, password);
             await updateProfile({ displayName });
-
             await sendEmailVerification();
-            toast('A Verification Email Is Sent. Please, Check Your Email.', {
-                position: 'bottom-right'
-            });
 
             event.target.reset();
             window.scrollTo(0, 0);
+            setShowLoading(false);
         } else {
             setErrorMsg('Your Given Password Mismatched!');
         }
@@ -100,9 +115,6 @@ const Signup = () => {
                         </div>
                         <div>
                             <p className='text-red-600'>{errorMsg}</p>
-                            <p className='text-red-600'>{creationError && 'Failed to Create User. Please, Try Again.'}</p>
-                            <p className='text-red-600'>{updatingError && 'Failed to Update Username. Please, Try Again.'}</p>
-                            <p className='text-red-600'>{verificationError && 'Failed to Verify Email. Please, Try Again.'}</p>
                         </div>
                         <div className='mt-12 mb-2'>
                             <button
@@ -118,6 +130,21 @@ const Signup = () => {
                     </form>
                     <SocialLogin />
                 </div>
+            </div>
+            <div>
+                {
+                    showLoading &&
+                    <>
+                        <div
+                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                <Loading />
+                            </div>
+                        </div>
+                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                }
             </div>
         </section>
     );

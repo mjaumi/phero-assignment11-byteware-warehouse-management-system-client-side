@@ -3,6 +3,7 @@ import { ArrowRightIcon } from '@heroicons/react/solid';
 import InventoryItem from '../InventoryItem/InventoryItem';
 import { useNavigate } from 'react-router-dom';
 import useItems from '../../../hooks/useItems';
+import Loading from '../../Shared/Loading/Loading';
 
 const InventoryItems = () => {
     //integration of React hooks
@@ -16,11 +17,18 @@ const InventoryItems = () => {
         <div className='mt-20 bg-byteware-light-gray py-10'>
             <div className='w-4/5 mx-auto'>
                 <h3 className='text-left font-semibold text-4xl mb-10'>Inventory Items</h3>
-                <div className='grid grid-cols-3 gap-10'>
-                    {
-                        items.slice(0, 6).map(item => <InventoryItem key={item._id} item={item} />)
-                    }
-                </div>
+                {
+                    items.length === 0 ?
+                        <div className='h-[20vh] flex items-center justify-center'>
+                            <Loading />
+                        </div>
+                        :
+                        <div className='grid grid-cols-3 gap-10'>
+                            {
+                                items.slice(0, 6).map(item => <InventoryItem key={item._id} item={item} />)
+                            }
+                        </div>
+                }
                 <div className='mt-10 flex justify-end'>
                     <button
                         onClick={() => navigate('/manageInventory')}

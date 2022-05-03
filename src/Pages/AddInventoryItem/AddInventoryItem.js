@@ -5,16 +5,18 @@ import { toast } from 'react-toastify';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading/Loading';
 
 const AddInventoryItem = () => {
     //integration of React hooks
     const [showAddNewItemModal, setShowAddNewItemModal] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     //integration of React Firebase hooks here
     const [user, loading] = useAuthState(auth);
 
     if (loading) {
-
+        setShowLoading(true);
     }
 
     //scroll to the top on render
@@ -104,6 +106,7 @@ const AddInventoryItem = () => {
         }
 
         setShowAddNewItemModal(false);
+        setShowLoading(true);
 
         fetch('https://guarded-cove-25404.herokuapp.com/addNewItem', {
             method: 'POST',
@@ -119,6 +122,7 @@ const AddInventoryItem = () => {
                 });
                 event.target.reset();
                 window.scrollTo(0, 0);
+                setShowLoading(false);
             });
 
     }
@@ -307,6 +311,21 @@ const AddInventoryItem = () => {
                                 <FontAwesomeIcon icon={faCirclePlus} className='mr-3' />
                                 Add Item
                             </button>
+                        </div>
+                        <div>
+                            {
+                                showLoading &&
+                                <>
+                                    <div
+                                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                                    >
+                                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                            <Loading />
+                                        </div>
+                                    </div>
+                                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                                </>
+                            }
                         </div>
                         <div>
                             {showAddNewItemModal ? (

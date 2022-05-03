@@ -7,6 +7,7 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
+import Loading from '../../Shared/Loading/Loading';
 
 const Login = () => {
     //integration of React Firebase hooks here
@@ -20,6 +21,7 @@ const Login = () => {
 
     //integration of React hooks here
     const [showToast, setShowToast] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
     const emailRef = useRef();
     const navigate = useNavigate();
     const location = useLocation();
@@ -46,6 +48,8 @@ const Login = () => {
 
     //event handler for log in
     const handleLogin = async (event) => {
+
+        setShowLoading(true);
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -53,14 +57,18 @@ const Login = () => {
         await signInWithEmailAndPassword(email, password);
         event.target.reset();
         window.scrollTo(0, 0);
+        setShowLoading(false);
     }
 
     const handleResetPassword = async () => {
+
         if (emailRef.current.value) {
+            setShowLoading(true);
             await sendPasswordResetEmail(emailRef.current.value);
             toast('Password Reset Email Has Been Sent!!!', {
                 position: 'bottom-right'
             });
+            setShowLoading(false);
         } else {
             toast('Please, Insert Your Email.', {
                 position: 'bottom-right'
@@ -111,6 +119,21 @@ const Login = () => {
                     </form>
                     <SocialLogin />
                 </div>
+            </div>
+            <div>
+                {
+                    showLoading &&
+                    <>
+                        <div
+                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                <Loading />
+                            </div>
+                        </div>
+                        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                }
             </div>
         </section>
     );
