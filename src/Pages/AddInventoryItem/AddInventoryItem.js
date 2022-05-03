@@ -163,7 +163,7 @@ const AddInventoryItem = () => {
                             <div className='mb-5 text-left flex'>
                                 <div className='w-[30%]'>
                                     <label className='ml-2 text-lg' htmlFor="supplier">Supplier<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 bg-gray-100 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold text-byteware-dark-gray' type="text" name='supplier' value={user?.displayName || ''} placeholder='Enter The Brand' required readOnly disabled />
+                                    <input className='border-2 bg-gray-100 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold text-byteware-dark-gray' type="text" name='supplier' value={user?.displayName || ''} placeholder="Enter The Supplier's Name" required readOnly disabled />
                                 </div>
                                 <div className='ml-5 w-[70%]'>
                                     <label className='ml-2 text-lg' htmlFor="email">Supplier's Email<span className='font-bold text-red-600 text-xl'>*</span></label>

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
@@ -21,6 +21,10 @@ const Login = () => {
     //integration of React hooks here
     const [showToast, setShowToast] = useState(false);
     const emailRef = useRef();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     //showing login successful toast
     if (user && !showToast) {
@@ -28,6 +32,7 @@ const Login = () => {
             position: 'bottom-right'
         });
         setShowToast(true);
+        navigate(from, { replace: true });
     }
 
     if (loading || sending) {
