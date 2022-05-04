@@ -22,24 +22,26 @@
 
 ## Technologies Used
 
-    #### Client-Side
-        - ReactJS Library.
-        - React Router Library.
-        - React Helmet Library.
-        - React Toastify Library.
-        - Tailwind CSS Framework.
-        - Tailwind Elements Library.
-        - Tailwind Starter Kit Library.
-        - Firebase For Authentication & Hosting.
-        - React Firebase Hooks Library.
-        - Heroicons Icon Library.
-        - Fontawesome Icon Library.
+#### Client-Side
 
-    #### Server-Side
-        - ExpressJS Node Framework.
-        - Cors Library.
-        - Dotenv Library.
-        - Nodemon Library.
-        - Json Web Token Library.
-        - MongoDB For storing data.
-        - Heroku For Server Hosting.
+- ReactJS Library.
+- React Router Library.
+- React Helmet Library.
+- React Toastify Library.
+- Tailwind CSS Framework.
+- Tailwind Elements Library.
+- Tailwind Starter Kit Library.
+- Firebase For Authentication & Hosting.
+- React Firebase Hooks Library.
+- Heroicons Icon Library.
+- Fontawesome Icon Library.
+
+#### Server-Side
+
+- ExpressJS Node Framework.
+- Cors Library.
+- Dotenv Library.
+- Nodemon Library.
+- Json Web Token Library.
+- MongoDB For storing data.
+- Heroku For Server Hosting.
