@@ -8,6 +8,7 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 import Loading from '../../Shared/Loading/Loading';
+import axios from 'axios';
 
 const Login = () => {
     //integration of React Firebase hooks here
@@ -20,7 +21,6 @@ const Login = () => {
     const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
 
     //integration of React hooks here
-    const [showToast, setShowToast] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
     const emailRef = useRef();
     const navigate = useNavigate();
@@ -29,11 +29,10 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     //showing login successful toast
-    if (user && !showToast) {
+    if (user) {
         toast('LogIn Successful!!!', {
             position: 'bottom-right'
         });
-        setShowToast(true);
         navigate(from, { replace: true });
     }
 
@@ -55,11 +54,17 @@ const Login = () => {
         const password = event.target.password.value;
 
         await signInWithEmailAndPassword(email, password);
+
+        //fetching JWT token
+        const { data } = await axios.post('https://guarded-cove-25404.herokuapp.com/getToken', { email });
+
+        localStorage.setItem('accessToken', data.accessToken);
         event.target.reset();
         window.scrollTo(0, 0);
         setShowLoading(false);
     }
 
+    //handling forget password email sending 
     const handleResetPassword = async () => {
 
         if (emailRef.current.value) {

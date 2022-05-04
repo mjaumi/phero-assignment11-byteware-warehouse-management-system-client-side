@@ -6,6 +6,7 @@ import PageTitle from '../Shared/PageTitle/PageTitle';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
+import axios from 'axios';
 
 const AddInventoryItem = () => {
     //integration of React hooks
@@ -25,7 +26,7 @@ const AddInventoryItem = () => {
     }, []);
 
     //handles add new item to database
-    const handleAddNewItem = event => {
+    const handleAddNewItem = async (event) => {
         event.preventDefault();
         const title = event.target.title.value;
         const img = event.target.imageURL.value;
@@ -108,22 +109,14 @@ const AddInventoryItem = () => {
         setShowAddNewItemModal(false);
         setShowLoading(true);
 
-        fetch('https://guarded-cove-25404.herokuapp.com/addNewItem', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newItem)
-        })
-            .then(res => res.json())
-            .then(data => {
-                toast('Item Added Successfully!!!', {
-                    position: 'bottom-right'
-                });
-                event.target.reset();
-                window.scrollTo(0, 0);
-                setShowLoading(false);
-            });
+        await axios.post('https://guarded-cove-25404.herokuapp.com/addNewItem', newItem);
+
+        toast('Item Added Successfully!!!', {
+            position: 'bottom-right'
+        });
+        event.target.reset();
+        window.scrollTo(0, 0);
+        setShowLoading(false);
 
     }
 

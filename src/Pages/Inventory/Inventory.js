@@ -5,6 +5,7 @@ import PageTitle from '../Shared/PageTitle/PageTitle';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading/Loading';
+import axios from 'axios';
 
 const Inventory = () => {
     //integration of React hooks
@@ -22,10 +23,14 @@ const Inventory = () => {
 
     //fetching individual item details from database
     useEffect(() => {
+
         const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setItem(data));
+        const fetchItem = async () => {
+            const { data } = await axios.get(url);
+            setItem(data);
+        }
+        fetchItem();
+
     }, [id]);
 
     //event handler for restock item form
@@ -45,32 +50,23 @@ const Inventory = () => {
     }
 
     //updating the quantity of items when delivered and restocked
-    const updateQuantity = unit => {
+    const updateQuantity = async (unit) => {
 
         setShowLoading(true);
         const newQuantity = item.quantity + unit;
-        const url = `https://guarded-cove-25404.herokuapp.com/updateItem/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                quantity: newQuantity
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
-                const url = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
-                fetch(url)
-                    .then(res => res.json())
-                    .then(data => setItem(data));
 
-                toast('Updated Stock Successfully!!!', {
-                    position: 'bottom-right'
-                });
-                setShowLoading(false);
-            });
+        const updateURL = `https://guarded-cove-25404.herokuapp.com/updateItem/${id}`;
+        await axios.put(updateURL, { quantity: newQuantity });
+
+        const reloadItemURL = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
+        const { data } = await axios.get(reloadItemURL);
+
+        setItem(data);
+        toast('Updated Stock Successfully!!!', {
+            position: 'bottom-right'
+        });
+        setShowLoading(false);
+
     }
 
     //rendering inventory component here

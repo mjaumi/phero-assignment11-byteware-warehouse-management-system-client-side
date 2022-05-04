@@ -1,5 +1,8 @@
+import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Item from '../Shared/Item/Item';
@@ -14,6 +17,7 @@ const MyItems = () => {
     const [items, setItems] = useState([]);
     const [showLoading, setShowLoading] = useState(false);
     const [showDeleteLoading, setShowDeleteLoading] = useState(false);
+    const navigate = useNavigate();
 
     //scroll to the top on render
     useEffect(() => {
@@ -24,32 +28,45 @@ const MyItems = () => {
     useEffect(() => {
 
         setShowLoading(true);
-        const url = `https://guarded-cove-25404.herokuapp.com/itemsBySupplier?email=${user.email}`;
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
+
+        const fetchMyItems = async () => {
+            const url = `https://guarded-cove-25404.herokuapp.com/itemsBySupplier?email=${user.email}`;
+            try {
+                const { data } = await axios.get(url, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
                 setItems(data);
                 setShowLoading(false);
-            });
-    }, [user.email]);
+            } catch (error) {
+                if (error.response.status === 401 || error.response.status === 403) {
+                    toast('Access Denied!!! Please, Try To Login Again.', {
+                        position: 'bottom-right'
+                    });
+                    signOut(auth);
+                    navigate('/login');
+                }
+            }
+        }
+        fetchMyItems();
+
+    }, [user.email, navigate]);
 
     //event handler for delete item button sent through props
-    const handleDeleteItem = id => {
+    const handleDeleteItem = async (id) => {
 
         setShowDeleteLoading(true);
         const url = `https://guarded-cove-25404.herokuapp.com/deleteItem/${id}`;
-        fetch(url, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                toast('Successfully Deleted Item!!!', {
-                    position: 'bottom-right'
-                });
-                const remainingItems = items.filter(item => item._id !== id);
-                setItems(remainingItems);
-                setShowDeleteLoading(false);
-            });
+        await axios.delete(url);
+
+        toast('Successfully Deleted Item!!!', {
+            position: 'bottom-right'
+        });
+        const remainingItems = items.filter(item => item._id !== id);
+        setItems(remainingItems);
+        setShowDeleteLoading(false);
+
     }
 
     //rendering my items component here

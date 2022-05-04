@@ -7,6 +7,7 @@ import useItems from '../../hooks/useItems';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
+import axios from 'axios';
 
 const ManageInventory = () => {
     //integration of custom hooks
@@ -22,22 +23,19 @@ const ManageInventory = () => {
     }, []);
 
     //event handler for delete item button sent through props
-    const handleDeleteItem = id => {
+    const handleDeleteItem = async (id) => {
 
         setShowLoading(true);
         const url = `https://guarded-cove-25404.herokuapp.com/deleteItem/${id}`;
-        fetch(url, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                toast('Successfully Deleted Item!!!', {
-                    position: 'bottom-right'
-                });
-                const remainingItems = items.filter(item => item._id !== id);
-                setItems(remainingItems);
-                setShowLoading(false);
-            });
+        await axios.delete(url);
+
+        toast('Successfully Deleted Item!!!', {
+            position: 'bottom-right'
+        });
+        const remainingItems = items.filter(item => item._id !== id);
+        setItems(remainingItems);
+        setShowLoading(false);
+
     }
 
     //rendering manage inventory component here
