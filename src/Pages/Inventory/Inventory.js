@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading/Loading';
 import axios from 'axios';
+import useOverview from '../../hooks/useOverview';
 
 const Inventory = () => {
     //integration of React hooks
@@ -15,6 +16,9 @@ const Inventory = () => {
     const [showLoading, setShowLoading] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
+
+    //integration of custom hooks
+    const [overview] = useOverview();
 
     //scroll to the top on render
     useEffect(() => {
@@ -60,6 +64,15 @@ const Inventory = () => {
 
         const reloadItemURL = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
         const { data } = await axios.get(reloadItemURL);
+
+        if (unit < 0) {
+            const totalCustomers = overview.totalCustomers + 1;
+            const laptopSold = overview.laptopSold + 1;
+            const revenue = overview.revenue + item.price;
+
+            const updateOverviewURL = `https://guarded-cove-25404.herokuapp.com/updateOverview/${overview._id}`;
+            await axios.put(updateOverviewURL, { totalCustomers, laptopSold, revenue });
+        }
 
         setItem(data);
         toast('Updated Stock Successfully!!!', {
