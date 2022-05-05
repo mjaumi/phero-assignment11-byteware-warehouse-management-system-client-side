@@ -42,8 +42,8 @@ const ManageInventory = () => {
     return (
         <section>
             <PageTitle title={'Manage Inventory'} />
-            <div className='w-4/5 mx-auto'>
-                <div className='flex justify-between'>
+            <div className='w-[95%] md:w-4/5 mx-auto'>
+                <div className='flex flex-col md:flex-row justify-between items-center'>
                     <h3 className='text-left font-semibold text-4xl my-10'>Inventory Items</h3>
                     <div className='flex items-center'>
                         <button
@@ -60,7 +60,7 @@ const ManageInventory = () => {
                             <Loading />
                         </div>
                         :
-                        <div className='grid grid-cols-3 mt-10 mb-20 gap-10'>
+                        <div className='grid grid-cols-1 md:grid-cols-3 mt-10 mb-20 gap-10'>
                             {
                                 items.map(item => <Item
                                     key={item._id}

@@ -17,7 +17,7 @@ const InventoryItem = ({ item }) => {
 
     //rendering inventory item card here
     return (
-        <div className='bg-white p-5 rounded-2xl shadow-2xl'>
+        <div className='bg-white p-5 rounded-2xl shadow-byte-shadow'>
             <div>
                 <img src={img} alt="" />
             </div>

@@ -124,21 +124,21 @@ const AddInventoryItem = () => {
     return (
         <section className='py-20 bg-byteware-light-gray'>
             <PageTitle title={'Add Inventory Item'} />
-            <div className='w-4/5 mx-auto'>
-                <h3 className='text-left font-semibold text-4xl mb-10'>Add Inventory Item</h3>
-                <div className='bg-white px-10 py-5 shadow-2xl rounded-xl my-10'>
+            <div className='w-[95%] md:w-4/5 mx-auto'>
+                <h3 className='md:text-left font-semibold text-4xl mb-10'>Add Inventory Item</h3>
+                <div className='bg-white px-5 md:px-10 py-5 shadow-2xl rounded-xl my-10'>
                     <form onSubmit={handleAddNewItem}>
                         <div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="title">Title<span className='font-bold text-red-600 text-xl'>*</span></label>
                                 <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='title' placeholder='Enter The Title Of The Item' required />
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-[30%]'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-[30%]'>
                                     <label className='ml-2 text-lg' htmlFor="brand">Brand<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='brand' placeholder='Enter The Brand' required />
                                 </div>
-                                <div className='ml-5 w-[70%]'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-[70%]'>
                                     <label className='ml-2 text-lg' htmlFor="model">Model<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='model' placeholder='Enter The Model' required />
                                 </div>
@@ -147,22 +147,22 @@ const AddInventoryItem = () => {
                                 <label className='ml-2 text-lg' htmlFor="imageURL">Image URL<span className='font-bold text-red-600 text-xl'>*</span></label>
                                 <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='imageURL' placeholder='Enter The Image URL' required />
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="price">Unit Price<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="number" name='price' placeholder='Enter Per Unit Price' required autoComplete='off' />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="quantity">Quantity<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="number" name='quantity' placeholder='Enter The Quantity' required autoComplete='off' />
                                 </div>
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-[30%]'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-[30%]'>
                                     <label className='ml-2 text-lg' htmlFor="supplier">Supplier<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 bg-gray-100 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold text-byteware-dark-gray' type="text" name='supplier' value={user?.displayName || ''} placeholder="Enter The Supplier's Name" required readOnly disabled />
                                 </div>
-                                <div className='ml-5 w-[70%]'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-[70%]'>
                                     <label className='ml-2 text-lg' htmlFor="email">Supplier's Email<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 bg-gray-100 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold text-byteware-dark-gray' type="text" name='email' value={user?.email || ''} placeholder="Enter The Supplier's Email" required readOnly disabled />
                                 </div>
@@ -182,32 +182,32 @@ const AddInventoryItem = () => {
                                 <label className='ml-2 text-lg' htmlFor="memory">Memory<span className='font-bold text-red-600 text-xl'>*</span></label>
                                 <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='memory' placeholder='Enter The Memory Configuration' required />
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="storage">Storage<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='storage' placeholder='Enter The Storage Configuration' required />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="graphics">Graphics<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='graphics' placeholder='Enter The Graphics Configuration' required />
                                 </div>
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="os">Operating System<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='os' placeholder='Enter The Operating System Configuration' required />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="audio">Audio<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='audio' placeholder='Enter The Audio Configuration' required />
                                 </div>
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="battery">Battery<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='battery' placeholder='Enter The Battery Configuration' required />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="adapter">Adapter<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='adapter' placeholder='Enter The Adapter Configuration' required />
                                 </div>
@@ -230,12 +230,12 @@ const AddInventoryItem = () => {
                         </div>
                         <div className='text-left mt-10'>
                             <h4 className='mb-3 font-semibold text-xl'>Network & Wireless Connectivity</h4>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="wifi">Wi-Fi<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='wifi' placeholder='Enter The Wi-Fi Configuration' required />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="bluetooth">Bluetooth<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='bluetooth' placeholder='Enter The Bluetooth Configuration' required />
                                 </div>
@@ -251,22 +251,22 @@ const AddInventoryItem = () => {
                                 <label className='ml-2 text-lg' htmlFor="audioJack">Audio Jack Combo<span className='font-bold text-red-600 text-xl'>*</span></label>
                                 <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='audioJack' placeholder='Enter The Audio Jack Configuration' required />
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="hdmi">HDMI<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='hdmi' placeholder='Enter The HDMI Configuration' required />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="ssdType">Supported SSD Type</label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='ssdType' placeholder='Enter The SSD Configuration' />
                                 </div>
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="extraRamSlot">Extra RAM Slot</label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='extraRamSlot' placeholder='Enter The Extra RAM Slot Configuration' />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="extraM2Slot">Extra M.2 Slot</label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='extraM2Slot' placeholder='Enter The Extra M.2 Slot Configuration' />
                                 </div>
@@ -278,12 +278,12 @@ const AddInventoryItem = () => {
                                 <label className='ml-2 text-lg' htmlFor="dimensions">Dimensions (W x D x H)<span className='font-bold text-red-600 text-xl'>*</span></label>
                                 <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='dimensions' placeholder='Enter The Dimensions' required />
                             </div>
-                            <div className='mb-5 text-left flex'>
-                                <div className='w-1/2'>
+                            <div className='mb-5 text-left flex flex-col md:flex-row'>
+                                <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="weight">Weight<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='weight' placeholder='Enter The Weight' required />
                                 </div>
-                                <div className='ml-5 w-1/2'>
+                                <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="color">Color(s)<span className='font-bold text-red-600 text-xl'>*</span></label>
                                     <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='color' placeholder='Enter The Colors Available' required />
                                 </div>
@@ -300,7 +300,7 @@ const AddInventoryItem = () => {
                             <button
                                 onClick={() => setShowAddNewItemModal(true)}
                                 type='button'
-                                className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
+                                className='w-full md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
                                 <FontAwesomeIcon icon={faCirclePlus} className='mr-3' />
                                 Add Item
                             </button>
@@ -324,7 +324,7 @@ const AddInventoryItem = () => {
                             {showAddNewItemModal ? (
                                 <>
                                     <div
-                                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                                        className="w-[90%] mx-auto md:w-full justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                                     >
                                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">

@@ -22,6 +22,10 @@ module.exports = {
       },
       gridTemplateRows: {
         'byteware-item-card-layout': '80px 210px 1fr',
+      },
+      boxShadow: {
+        'byte-shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+        'byte-small-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
       }
     },
   },

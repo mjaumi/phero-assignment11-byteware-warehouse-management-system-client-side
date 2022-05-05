@@ -19,6 +19,7 @@
 - In order to **see, add, delete or update** items, user must be **logged in** to the website.
 - A **JSON Web Token** is implemented in the **My Items** page to secure the API.
 - While loading data, a **Spinner** will be shown to the user.
+- This website is fully responsive in **mobile & desktop/laptop** devices.
 
 ## Technologies Used
 

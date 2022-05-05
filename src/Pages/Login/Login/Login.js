@@ -85,8 +85,8 @@ const Login = () => {
     return (
         <section className='bg-byteware-light-gray'>
             <PageTitle title={'Log In'} />
-            <div className='w-4/5 mx-auto py-14 flex justify-center'>
-                <div className='w-2/5 mx auto p-5 bg-white rounded-2xl shadow-2xl'>
+            <div className='w-[95%] md:w-4/5 mx-auto py-14 flex justify-center'>
+                <div className='md:w-2/5 mx auto p-5 bg-white rounded-2xl shadow-2xl'>
                     <form onSubmit={handleLogin}>
                         <div className='text-left mb-5'>
                             <h4 className='text-3xl font-bold'>Log In</h4>

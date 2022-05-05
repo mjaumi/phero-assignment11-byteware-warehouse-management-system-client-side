@@ -80,36 +80,36 @@ const Inventory = () => {
                     </div>
                     :
                     <>
-                        <div className='w-4/5 mx-auto pt-20'>
-                            <div className='flex justify-between'>
+                        <div className='w-[95%] md:w-4/5 mx-auto pt-20'>
+                            <div className='flex flex-col md:flex-row justify-between'>
                                 <div>
                                     <img src={item?.img} alt="" />
                                 </div>
-                                <div className='flex-1 text-left ml-32'>
+                                <div className='flex-1 md:text-left md:ml-32'>
                                     <h2 className='font-bold text-2xl'>{item?.title}</h2>
-                                    <div className='flex mt-5'>
-                                        <h5 className='bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Product ID: <span className='font-bold text-[#000000]'>{item?._id}</span></h5>
-                                        <h5 className='ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Brand: <span className='font-bold text-[#000000]'>{item?.brand}</span></h5>
-                                        <h5 className='ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-md text-byteware-dark-gray'>Status: <span className={`font-bold ${item?.quantity > 0 ? 'text-[#007812]' : 'text-red-600'}`}>{item?.quantity > 0 ? 'In Stock' : 'Out of Stock'}</span></h5>
+                                    <div className='flex flex-col md:flex-row mt-5'>
+                                        <h5 className='bg-byteware-genre-bg py-2 px-3 rounded-full shadow-byte-small-shadow text-byteware-dark-gray'>Product ID: <span className='font-bold text-black'>{item?._id}</span></h5>
+                                        <h5 className='mt-5 md:mt-0 md:ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-byte-small-shadow text-byteware-dark-gray'>Brand: <span className='font-bold text-black'>{item?.brand}</span></h5>
+                                        <h5 className='mt-5 md:mt-0 md:ml-5 bg-byteware-genre-bg py-2 px-3 rounded-full shadow-byte-small-shadow text-byteware-dark-gray'>Status: <span className={`font-bold ${item?.quantity > 0 ? 'text-[#007812]' : 'text-red-600'}`}>{item?.quantity > 0 ? 'In Stock' : 'Out of Stock'}</span></h5>
                                     </div>
                                     <div className='mt-10'>
                                         <h3 className='font-extrabold text-3xl text-byteware-light-red'>৳{item?.price}</h3>
                                     </div>
                                     <div className='mt-10'>
                                         <h3 className='font-bold text-lg'>Key Features</h3>
-                                        <div className='mt-4'>
-                                            <p className='text-byteware-dark-gray'>Model: <span className='text-[#000000]'>{item?.model}</span></p>
-                                            <p className='mt-2 text-byteware-dark-gray'>Processor: <span className='text-[#000000]'>{item?.basicInfo?.processor}</span></p>
-                                            <p className='mt-2 text-byteware-dark-gray'>Memory: <span className='text-[#000000]'>{item?.basicInfo?.memory}</span></p>
-                                            <p className='mt-2 text-byteware-dark-gray'>Storage: <span className='text-[#000000]'>{item?.basicInfo?.storage}</span></p>
-                                            <p className='mt-2 text-byteware-dark-gray'>Display: <span className='text-[#000000]'>{item?.basicInfo?.display}</span></p>
-                                            <p className='mt-2 text-byteware-dark-gray'>Quantity: <span className='text-[#000000]'>{item?.quantity}</span></p>
-                                            <p className='mt-2 text-byteware-dark-gray'>Supplier: <span className='text-[#000000]'>{item?.supplier}</span></p>
+                                        <div className='w-4/5 mx-auto md:w-full mt-4 text-left'>
+                                            <p className='text-byteware-dark-gray'>Model: <span className='text-black'>{item?.model}</span></p>
+                                            <p className='mt-2 text-byteware-dark-gray'>Processor: <span className='text-black'>{item?.basicInfo?.processor}</span></p>
+                                            <p className='mt-2 text-byteware-dark-gray'>Memory: <span className='text-black'>{item?.basicInfo?.memory}</span></p>
+                                            <p className='mt-2 text-byteware-dark-gray'>Storage: <span className='text-black'>{item?.basicInfo?.storage}</span></p>
+                                            <p className='mt-2 text-byteware-dark-gray'>Display: <span className='text-black'>{item?.basicInfo?.display}</span></p>
+                                            <p className='mt-2 text-byteware-dark-gray'>Quantity: <span className='text-black'>{item?.quantity}</span></p>
+                                            <p className='mt-2 text-byteware-dark-gray'>Supplier: <span className='text-black'>{item?.supplier}</span></p>
                                         </div>
                                         <div className='my-12'>
                                             <button
                                                 onClick={() => setShowDeliveredModal(true)}
-                                                className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed' disabled={item.quantity === 0}>
+                                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed' disabled={item.quantity === 0}>
                                                 <FontAwesomeIcon icon={faTruckMoving} className='mr-3' />
                                                 Delivered
                                             </button>
@@ -119,7 +119,7 @@ const Inventory = () => {
                             </div>
                         </div>
                         <div className='bg-byteware-light-gray py-20'>
-                            <div className='w-3/5 mx-auto bg-byteware-white p-5 rounded-2xl shadow-xl'>
+                            <div className='w-[95%] md:w-3/5 mx-auto bg-byteware-white p-5 rounded-2xl shadow-byte-shadow'>
                                 <h3 className='font-bold text-2xl text-left pt-10 mb-5'>Specification</h3>
                                 <div>
                                     <h4 className='font-bold text-lg text-left text-byteware-light-red bg-byteware-light-red/20 px-5 py-3 rounded-xl'>Basic Information</h4>
@@ -253,7 +253,7 @@ const Inventory = () => {
                                 <div className='mt-5'>
                                     <h4 className='font-bold text-lg text-left text-byteware-light-red bg-byteware-light-red/20 px-5 py-3 rounded-xl'>Ports, Connectors & Slots</h4>
                                     <div className="flex flex-col">
-                                        <div className="overflow-x-hidden sm:-mx-6 lg:-mx-8">
+                                        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                                                 <div className="overflow-hidden">
                                                     <table className="min-w-full">
@@ -356,7 +356,7 @@ const Inventory = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='mt-20 w-3/5 mx-auto bg-byteware-white p-5 rounded-2xl shadow-xl'>
+                            <div className='mt-20 w-[95%] md:w-3/5 mx-auto bg-byteware-white p-5 rounded-2xl shadow-byte-shadow'>
                                 <h3 className='font-bold text-2xl text-left pt-5 mb-5'>Restock The Item</h3>
                                 <form onSubmit={handleRestockItem}>
                                     <div className='mb-5'>
@@ -373,7 +373,7 @@ const Inventory = () => {
                                         {showRestockModal ? (
                                             <>
                                                 <div
-                                                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                                                    className="w-[90%] mx-auto md:w-full justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                                                 >
                                                     <div className="relative w-auto my-6 mx-auto max-w-3xl">
                                                         <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -446,7 +446,7 @@ const Inventory = () => {
                             {showDeliveredModal ? (
                                 <>
                                     <div
-                                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                                        className="w-[90%] mx-auto md:w-full justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                                     >
                                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">

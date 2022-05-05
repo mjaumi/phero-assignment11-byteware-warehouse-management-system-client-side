@@ -12,8 +12,8 @@ const Blogs = () => {
     return (
         <section className='bg-byteware-light-gray'>
             <PageTitle title={'Blogs'} />
-            <div className='w-4/5 mx-auto py-10'>
-                <h3 className='text-left font-semibold text-4xl mb-10'>Questions & Answers</h3>
+            <div className='w-[95%] md:w-4/5 mx-auto py-10'>
+                <h3 className='md:text-left font-semibold text-4xl mb-10'>Questions & Answers</h3>
                 <div className='text-left border-2 border-byteware-base-red p-5 rounded-2xl my-10 bg-white shadow-xl'>
                     <h4 className='font-bold text-xl text-gray-400'>Q1. What is the difference between JavaScript & Node JS ?</h4>
                     <p className='mt-3'><strong>Answer:</strong> JavaScript is a simple programming language that runs in any browser JavaScript Engine. On the other hand, Node JS is an interpreter or running environment for JavaScript programming language. JavaScript is usually used for client-side activity such as making the website dynamic. But Node Js is used for server-side processes. JavaScript follows Java programming language standards but there is a little bit of difference on the term of writing the code. Whereas Node JS is written in C++ and provides a browser JavaScript running engine.</p>
