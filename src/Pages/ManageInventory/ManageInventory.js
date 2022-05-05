@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
 import axios from 'axios';
+import Pagination from '../Shared/Pagination/Pagination';
 
 const ManageInventory = () => {
     //integration of React hooks
@@ -129,15 +130,11 @@ const ManageInventory = () => {
                         </>
                 }
             </div>
-            <div className='my-10'>
-                {
-                    [...Array(pageCount).keys()].map(pageNumber => <button
-                        key={pageNumber}
-                        className={`font-semibold border-2 border-byteware-base-red w-10 h-10 rounded-full ml-5 hover:text-byteware-base-red duration-300 ${currentPage === pageNumber ? 'bg-byteware-base-red text-white hover:text-white' : ''}`}
-                        onClick={() => setCurrentPage(pageNumber)}
-                    >{pageNumber + 1}</button>)
-                }
-            </div>
+            <Pagination
+                pageCount={pageCount}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
             <div>
                 {
                     showLoading &&

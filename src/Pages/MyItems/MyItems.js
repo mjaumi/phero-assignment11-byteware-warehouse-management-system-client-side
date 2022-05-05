@@ -8,6 +8,7 @@ import auth from '../../firebase.init';
 import Item from '../Shared/Item/Item';
 import Loading from '../Shared/Loading/Loading';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import Pagination from '../Shared/Pagination/Pagination';
 
 const MyItems = () => {
     //integration of React Firebase hooks here
@@ -17,6 +18,8 @@ const MyItems = () => {
     const [items, setItems] = useState([]);
     const [showLoading, setShowLoading] = useState(false);
     const [showDeleteLoading, setShowDeleteLoading] = useState(false);
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
     const navigate = useNavigate();
 
     //scroll to the top on render
@@ -24,13 +27,23 @@ const MyItems = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    useEffect(() => {
+        const getMyItemsCount = async () => {
+            const url = `https://guarded-cove-25404.herokuapp.com/itemsCountBySupplier?email=${user.email}`;
+            const { data } = await axios.get(url);
+            const totalPages = Math.ceil(data.supplierItemsCount / 6);
+            setPageCount(totalPages);
+        }
+        getMyItemsCount();
+    }, [user]);
+
     //fetching items by supplier here
     useEffect(() => {
 
         setShowLoading(true);
 
         const fetchMyItems = async () => {
-            const url = `https://guarded-cove-25404.herokuapp.com/itemsBySupplier?email=${user.email}`;
+            const url = `https://guarded-cove-25404.herokuapp.com/itemsBySupplier?email=${user.email}&page=${currentPage}&size=${6}`;
             try {
                 const { data } = await axios.get(url, {
                     headers: {
@@ -51,7 +64,7 @@ const MyItems = () => {
         }
         fetchMyItems();
 
-    }, [user.email, navigate]);
+    }, [user, navigate, currentPage]);
 
     //event handler for delete item button sent through props
     const handleDeleteItem = async (id) => {
@@ -101,6 +114,11 @@ const MyItems = () => {
                         </>
                 }
             </div>
+            <Pagination
+                pageCount={pageCount}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
             <div>
                 {
                     showDeleteLoading &&
