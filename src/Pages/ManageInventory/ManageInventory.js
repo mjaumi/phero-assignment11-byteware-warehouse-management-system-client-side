@@ -20,7 +20,7 @@ const ManageInventory = () => {
     const navigate = useNavigate();
 
     //integration of custom hooks
-    const [items, setItems] = useItems(brand, currentPage, 3);
+    const [items, setItems] = useItems(brand, currentPage, 6);
 
     //scroll to the top on render
     useEffect(() => {
@@ -33,11 +33,11 @@ const ManageInventory = () => {
 
             if (!brand) {
                 const { data } = await axios.get('https://guarded-cove-25404.herokuapp.com/itemsCount');
-                totalPages = Math.ceil(data.count / 3);
+                totalPages = Math.ceil(data.count / 6);
             } else {
                 const url = `https://guarded-cove-25404.herokuapp.com/itemsCountByBrand?brand=${brand}`;
                 const { data } = await axios.get(url);
-                totalPages = Math.ceil(data.countBrand / 3);
+                totalPages = Math.ceil(data.countBrand / 6);
             }
 
             setPageCount(totalPages);
@@ -51,7 +51,7 @@ const ManageInventory = () => {
         if (brand) {
             setFilter(brand);
 
-            const url = `https://guarded-cove-25404.herokuapp.com/itemsByBrand?brand=${brand}&page=${currentPage}&size=${3}`;
+            const url = `https://guarded-cove-25404.herokuapp.com/itemsByBrand?brand=${brand}&page=${currentPage}&size=${6}`;
             const SearchByBrands = async () => {
                 const { data } = await axios.get(url);
 

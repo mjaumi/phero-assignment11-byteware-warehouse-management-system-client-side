@@ -2,11 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { MenuIcon } from '@heroicons/react/outline';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import CustomLink from '../CustomLink/CustomLink';
 
 const Header = () => {
     //integration of React hooks
@@ -38,14 +39,14 @@ const Header = () => {
                     <MenuIcon onClick={() => setShowMenu(!showMenu)} className='w-10 h-10 text-byteware-base-red' />
                 </div>
                 <div className={`absolute ${showMenu ? 'top-[40px]' : '-top-[450px]'} left-0 -z-[1000] md:z-0 md:static w-full md:w-fit bg-byteware-white duration-300 ease-in-out pb-5 md:pb-0 shadow-xl md:shadow-none`}>
-                    <nav className='font-semibold flex flex-col md:flex-row items-center'>
-                        <Link className='mt-14 md:mt-0 hover:opacity-50 duration-300' to='/'>Home</Link>
-                        <Link className='mt-5 md:mt-0 md:ml-5 hover:opacity-50 duration-300' to='/blogs'>Blogs</Link>
+                    <nav className='font-semibold flex flex-col md:flex-row items-center pt-14 md:pt-0'>
+                        <CustomLink to='/'>Home</CustomLink>
+                        <CustomLink to='/blogs'>Blogs</CustomLink>
                         {
                             user ? <>
-                                <Link className='mt-5 md:mt-0 md:ml-5 hover:opacity-50 duration-300' to='/manageInventory'>Manage Items</Link>
-                                <Link className='mt-5 md:mt-0 md:ml-5 hover:opacity-50 duration-300' to='/addInventoryItem'>Add Items</Link>
-                                <Link className='mt-5 md:mt-0 md:ml-5 hover:opacity-50 duration-300' to='/myItems'>My Items</Link>
+                                <CustomLink to='/manageInventory'>Manage Items</CustomLink>
+                                <CustomLink to='/addInventoryItem'>Add Items</CustomLink>
+                                <CustomLink to='/myItems'>My Items</CustomLink>
                                 <p className='mt-5 md:mt-0 md:ml-5 font-bold text-lg text-gray-400'>{user.displayName}</p>
                                 <button
                                     onClick={handleSignOut}
