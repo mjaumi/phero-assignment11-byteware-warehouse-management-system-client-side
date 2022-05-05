@@ -26,7 +26,7 @@ const ManageInventory = () => {
     //scroll to the top on render
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+    }, [items]);
 
     useEffect(() => {
         const getItemsCount = async () => {
