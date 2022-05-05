@@ -12,6 +12,7 @@ import axios from 'axios';
 const ManageInventory = () => {
     //integration of React hooks
     const [showLoading, setShowLoading] = useState(false);
+    const [noDataFound, setNoDataFound] = useState(false);
     const [filter, setFilter] = useState('All');
     const { brand } = useParams();
     const navigate = useNavigate();
@@ -33,6 +34,12 @@ const ManageInventory = () => {
             const url = `https://guarded-cove-25404.herokuapp.com/itemsByBrand/?brand=${brand}`;
             const SearchByBrands = async () => {
                 const { data } = await axios.get(url);
+
+                if (data.length === 0) {
+                    setNoDataFound(true);
+                } else {
+                    setNoDataFound(false);
+                }
                 setItems(data);
             }
             SearchByBrands();
@@ -77,19 +84,28 @@ const ManageInventory = () => {
                     </div>
                 </div>
                 {
-                    items.length === 0 ?
+                    (!noDataFound && items.length === 0) ?
                         <div className='h-[80vh] flex items-center justify-center'>
                             <Loading />
                         </div>
                         :
-                        <div className='grid grid-cols-1 md:grid-cols-3 mt-10 mb-20 gap-10'>
+                        <>
                             {
-                                items.map(item => <Item
-                                    key={item._id}
-                                    item={item}
-                                    handleDeleteItem={handleDeleteItem} />)
+                                noDataFound ?
+                                    <div className='h-[60vh] flex items-center justify-center'>
+                                        <h2 className='font-extrabold text-4xl md:text-6xl text-gray-300'>No Items Found!</h2>
+                                    </div>
+                                    :
+                                    <div className='grid grid-cols-1 md:grid-cols-3 mt-10 mb-20 gap-10'>
+                                        {
+                                            items.map(item => <Item
+                                                key={item._id}
+                                                item={item}
+                                                handleDeleteItem={handleDeleteItem} />)
+                                        }
+                                    </div>
                             }
-                        </div>
+                        </>
                 }
             </div>
             <div>

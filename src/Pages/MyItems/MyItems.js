@@ -86,7 +86,7 @@ const MyItems = () => {
                             {
                                 items.length === 0 ?
                                     <div className='h-[60vh] flex items-center justify-center'>
-                                        <h2 className='font-extrabold text-6xl text-gray-300'>No Items To Show Yet</h2>
+                                        <h2 className='font-extrabold text-4xl md:text-6xl text-gray-300'>No Items To Show Yet!</h2>
                                     </div>
                                     :
                                     <div className='grid grid-cols-1 md:grid-cols-3 mt-10 mb-20 gap-10'>
