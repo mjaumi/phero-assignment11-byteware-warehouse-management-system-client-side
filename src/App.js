@@ -32,6 +32,10 @@ function App() {
           <RequireAuth>
             <ManageInventory />
           </RequireAuth>} />
+        <Route path='/manageInventory/:brand' element={
+          <RequireAuth>
+            <ManageInventory />
+          </RequireAuth>} />
         <Route path='/addInventoryItem' element={
           <RequireAuth>
             <AddInventoryItem />

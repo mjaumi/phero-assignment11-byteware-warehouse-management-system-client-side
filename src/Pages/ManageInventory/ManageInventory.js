@@ -5,22 +5,41 @@ import PageTitle from '../Shared/PageTitle/PageTitle';
 import Item from '../Shared/Item/Item';
 import useItems from '../../hooks/useItems';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
 import axios from 'axios';
 
 const ManageInventory = () => {
-    //integration of custom hooks
-    const [items, setItems] = useItems();
-
     //integration of React hooks
     const [showLoading, setShowLoading] = useState(false);
+    const [filter, setFilter] = useState('All');
+    const { brand } = useParams();
     const navigate = useNavigate();
+
+    //integration of custom hooks
+    const [items, setItems] = useItems(brand);
 
     //scroll to the top on render
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    //setting filter from featured brands
+    useEffect(() => {
+
+        if (brand) {
+            setFilter(brand);
+
+            const url = `https://guarded-cove-25404.herokuapp.com/itemsByBrand/?brand=${brand}`;
+            const SearchByBrands = async () => {
+                const { data } = await axios.get(url);
+                setItems(data);
+            }
+            SearchByBrands();
+        } else {
+            setFilter('All');
+        }
+    }, [brand, setItems]);
 
     //event handler for delete item button sent through props
     const handleDeleteItem = async (id) => {
@@ -44,7 +63,10 @@ const ManageInventory = () => {
             <PageTitle title={'Manage Inventory'} />
             <div className='w-[95%] md:w-4/5 mx-auto'>
                 <div className='flex flex-col md:flex-row justify-between items-center'>
-                    <h3 className='text-left font-semibold text-4xl my-10'>Inventory Items</h3>
+                    <div className='flex flex-col md:flex-row'>
+                        <h3 className='md:text-left font-semibold text-4xl mt-10'>Inventory Items</h3>
+                        <h3 className='md:text-left font-semibold text-4xl md:ml-2 mt-0 md:mt-10 mb-10 md:mb-0'>({filter})</h3>
+                    </div>
                     <div className='flex items-center'>
                         <button
                             onClick={() => navigate('/addInventoryItem')}

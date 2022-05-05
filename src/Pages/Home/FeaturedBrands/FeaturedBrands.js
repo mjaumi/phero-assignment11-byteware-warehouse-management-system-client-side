@@ -13,22 +13,22 @@ const FeaturedBrands = () => {
                 <h3 className='md:text-left font-semibold text-4xl mb-20 md:mb-10'>Featured Brands</h3>
                 <div className='grid grid-cols-1 md:grid-cols-4 gap-28'>
                     <div className='opacity-40 my-auto cursor-pointer hover:opacity-100 duration-300 hover:scale-110'>
-                        <Link to='/'>
+                        <Link to='/manageInventory/Acer'>
                             <img src={acer} alt="" />
                         </Link>
                     </div>
                     <div className='opacity-40 my-auto cursor-pointer hover:opacity-100 duration-300 hover:scale-110'>
-                        <Link to='/'>
+                        <Link to='/manageInventory/Asus'>
                             <img src={asus} alt="" />
                         </Link>
                     </div>
                     <div className='opacity-40 my-auto cursor-pointer hover:opacity-100 duration-300 hover:scale-110'>
-                        <Link to='/'>
+                        <Link to='/manageInventory/Dell'>
                             <img className='h-[90%]' src={dell} alt="" />
                         </Link>
                     </div>
                     <div className='opacity-40 my-auto cursor-pointer hover:opacity-100 duration-300 hover:scale-110'>
-                        <Link to='/'>
+                        <Link to='/manageInventory/Lenovo'>
                             <img src={lenovo} alt="" />
                         </Link>
                     </div>
