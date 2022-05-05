@@ -22,7 +22,7 @@ const InventoryItem = ({ item }) => {
                 <img src={img} alt="" />
             </div>
             <div className='mt-5 grid grid-rows-byteware-item-card-layout'>
-                <h4 className='text-left font-semibold'>{title}</h4>
+                <h4 className='md:text-left font-semibold'>{title}</h4>
                 <div className='text-left text-byteware-dark-gray my-5 pb-7 border-b border-byteware-border-gray'>
                     <small className='block mb-2'><li>{basicInfo.processor}</li></small>
                     <small className='block mb-2'><li>{basicInfo.memory}</li></small>

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Footer = () => {
     return (
         <footer className='bg-byteware-footer-bg pt-10 pb-5'>
-            <div className='w-4/5 mx-auto grid grid-cols-3 gap-28'>
+            <div className='w-[95%] md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-3 gap-28'>
                 <div>
                     <h4 className='text-byteware-white font-medium tracking-widest text-lg text-left ml-5 uppercase'>Support</h4>
                     <div className='mt-5 flex p-3 border rounded-full border-byteware-dark-gray cursor-pointer hover:border-byteware-base-red duration-300'>
@@ -32,9 +32,9 @@ const Footer = () => {
                 </div>
                 <div>
                 </div>
-                <div className='ml-14'>
-                    <h4 className='text-byteware-white font-medium tracking-widest text-lg text-left uppercase'>Stay Connected</h4>
-                    <div className='mt-5 text-left'>
+                <div className='md:ml-14'>
+                    <h4 className='text-byteware-white font-medium tracking-widest text-lg md:text-left uppercase'>Stay Connected</h4>
+                    <div className='mt-5 md:text-left'>
                         <h4 className='text-byteware-white text-lg'>Byteware Warehouse Ltd.</h4>
                         <p className='mt-2 text-byteware-dark-gray'>14th floor, Opposite to Rajarbag Police Telecom Bhaban, Motijheel,Dhaka 1000</p>
                         <h4 className='mt-5 text-byteware-dark-gray font-medium'>Email:</h4>
@@ -53,7 +53,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-4/5 mx-auto flex justify-between border-t border-byteware-dark-gray mt-10 pt-3'>
+            <div className='w-[95%] md:w-4/5 mx-auto flex flex-col md:flex-row justify-between border-t border-byteware-dark-gray mt-10 pt-3'>
                 <div>
                     <p className='text-byteware-dark-gray'><small>©2022 Byteware Warehouse Ltd. | All rights reserved</small></p>
                 </div>

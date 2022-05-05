@@ -7,9 +7,9 @@ const SalesOverview = () => {
     //rendering sales overview component here
     return (
         <div className='py-20 bg-byteware-light-gray'>
-            <div className='w-4/5 mx-auto'>
-                <h3 className='text-left font-semibold text-4xl mb-10'>Sales Overview</h3>
-                <div className='grid grid-cols-3 gap-28'>
+            <div className='w-[95%] md:w-4/5 mx-auto'>
+                <h3 className='md:text-left font-semibold text-4xl mb-10'>Sales Overview</h3>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-28'>
                     <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-2xl cursor-pointer hover:scale-125 duration-300'>
                         <EmojiHappyIcon className='w-14 h-14 text-byteware-light-red' />
                         <h2 className='mt-5 font-extrabold text-4xl'>50</h2>
