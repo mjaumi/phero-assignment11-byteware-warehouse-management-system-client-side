@@ -9,6 +9,8 @@
 ## Features
 
 - User can see only **six** inventory items in the home page.
+- In the **Featured Brands** section, user can search inventory items with featured brands.
+- In the **Sales Overview** section, the data provided updates from database on every single delivery.
 - User must go to **Manage Inventory** page to see all the inventory items.
 - User will go to **Inventory** page by clicking on the **Update Stock** button of the inventory item cards.
 - There is a button in the **Inventory** page named **Delivered** by clicking which the quantity of the current item will decrease by one.

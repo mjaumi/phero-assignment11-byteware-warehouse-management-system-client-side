@@ -62,9 +62,6 @@ const Inventory = () => {
         const updateURL = `https://guarded-cove-25404.herokuapp.com/updateItem/${id}`;
         await axios.put(updateURL, { quantity: newQuantity });
 
-        const reloadItemURL = `https://guarded-cove-25404.herokuapp.com/item/${id}`;
-        const { data } = await axios.get(reloadItemURL);
-
         if (unit < 0) {
             const totalCustomers = overview.totalCustomers + 1;
             const laptopSold = overview.laptopSold + 1;
@@ -74,11 +71,12 @@ const Inventory = () => {
             await axios.put(updateOverviewURL, { totalCustomers, laptopSold, revenue });
         }
 
-        setItem(data);
+        //setItem(data);
         toast('Updated Stock Successfully!!!', {
             position: 'bottom-right'
         });
         setShowLoading(false);
+        setItem({ ...item, 'quantity': newQuantity });
 
     }
 

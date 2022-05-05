@@ -14,16 +14,36 @@ const ManageInventory = () => {
     const [showLoading, setShowLoading] = useState(false);
     const [noDataFound, setNoDataFound] = useState(false);
     const [filter, setFilter] = useState('All');
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
     const { brand } = useParams();
     const navigate = useNavigate();
 
     //integration of custom hooks
-    const [items, setItems] = useItems(brand);
+    const [items, setItems] = useItems(brand, currentPage, 3);
 
     //scroll to the top on render
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        const getItemsCount = async () => {
+            let totalPages;
+
+            if (!brand) {
+                const { data } = await axios.get('https://guarded-cove-25404.herokuapp.com/itemsCount');
+                totalPages = Math.ceil(data.count / 3);
+            } else {
+                const url = `https://guarded-cove-25404.herokuapp.com/itemsCountByBrand?brand=${brand}`;
+                const { data } = await axios.get(url);
+                totalPages = Math.ceil(data.countBrand / 3);
+            }
+
+            setPageCount(totalPages);
+        }
+        getItemsCount();
+    }, [brand]);
 
     //setting filter from featured brands
     useEffect(() => {
@@ -31,7 +51,7 @@ const ManageInventory = () => {
         if (brand) {
             setFilter(brand);
 
-            const url = `https://guarded-cove-25404.herokuapp.com/itemsByBrand/?brand=${brand}`;
+            const url = `https://guarded-cove-25404.herokuapp.com/itemsByBrand?brand=${brand}&page=${currentPage}&size=${3}`;
             const SearchByBrands = async () => {
                 const { data } = await axios.get(url);
 
@@ -46,7 +66,8 @@ const ManageInventory = () => {
         } else {
             setFilter('All');
         }
-    }, [brand, setItems]);
+
+    }, [brand, setItems, currentPage]);
 
     //event handler for delete item button sent through props
     const handleDeleteItem = async (id) => {
@@ -106,6 +127,15 @@ const ManageInventory = () => {
                                     </div>
                             }
                         </>
+                }
+            </div>
+            <div className='my-10'>
+                {
+                    [...Array(pageCount).keys()].map(pageNumber => <button
+                        key={pageNumber}
+                        className={`font-semibold border-2 border-byteware-base-red w-10 h-10 rounded-full ml-5 hover:text-byteware-base-red duration-300 ${currentPage === pageNumber ? 'bg-byteware-base-red text-white hover:text-white' : ''}`}
+                        onClick={() => setCurrentPage(pageNumber)}
+                    >{pageNumber + 1}</button>)
                 }
             </div>
             <div>

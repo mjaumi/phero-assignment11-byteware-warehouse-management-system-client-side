@@ -131,21 +131,21 @@ const AddInventoryItem = () => {
                         <div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="title">Title<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='title' placeholder='Enter The Title Of The Item' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='title' placeholder='Enter The Title Of The Item' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-[30%]'>
                                     <label className='ml-2 text-lg' htmlFor="brand">Brand<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='brand' placeholder='Enter The Brand' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='brand' placeholder='Enter The Brand' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-[70%]'>
                                     <label className='ml-2 text-lg' htmlFor="model">Model<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='model' placeholder='Enter The Model' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='model' placeholder='Enter The Model' required autoComplete='off' />
                                 </div>
                             </div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="imageURL">Image URL<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='imageURL' placeholder='Enter The Image URL' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='imageURL' placeholder='Enter The Image URL' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
@@ -172,44 +172,44 @@ const AddInventoryItem = () => {
                             <h4 className='mb-3 font-semibold text-xl'>Basic Information</h4>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="processor">Processor<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='processor' placeholder='Enter The Processor Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='processor' placeholder='Enter The Processor Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="display">Display<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='display' placeholder='Enter The Display Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='display' placeholder='Enter The Display Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="memory">Memory<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='memory' placeholder='Enter The Memory Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='memory' placeholder='Enter The Memory Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="storage">Storage<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='storage' placeholder='Enter The Storage Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='storage' placeholder='Enter The Storage Configuration' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="graphics">Graphics<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='graphics' placeholder='Enter The Graphics Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='graphics' placeholder='Enter The Graphics Configuration' required autoComplete='off' />
                                 </div>
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="os">Operating System<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='os' placeholder='Enter The Operating System Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='os' placeholder='Enter The Operating System Configuration' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="audio">Audio<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='audio' placeholder='Enter The Audio Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='audio' placeholder='Enter The Audio Configuration' required autoComplete='off' />
                                 </div>
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="battery">Battery<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='battery' placeholder='Enter The Battery Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='battery' placeholder='Enter The Battery Configuration' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="adapter">Adapter<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='adapter' placeholder='Enter The Adapter Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='adapter' placeholder='Enter The Adapter Configuration' required autoComplete='off' />
                                 </div>
                             </div>
                         </div>
@@ -217,15 +217,15 @@ const AddInventoryItem = () => {
                             <h4 className='mb-3 font-semibold text-xl'>Input Devices</h4>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="keyboard">Keyboard<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='keyboard' placeholder='Enter The Keyboard Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='keyboard' placeholder='Enter The Keyboard Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="webcam">WebCam<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='webcam' placeholder='Enter The WebCam Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='webcam' placeholder='Enter The WebCam Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="cardReader">Card Reader</label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='cardReader' placeholder="Enter The Card Reader's Configuration" />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='cardReader' placeholder="Enter The Card Reader's Configuration" autoComplete='off' />
                             </div>
                         </div>
                         <div className='text-left mt-10'>
@@ -233,11 +233,11 @@ const AddInventoryItem = () => {
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="wifi">Wi-Fi<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='wifi' placeholder='Enter The Wi-Fi Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='wifi' placeholder='Enter The Wi-Fi Configuration' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="bluetooth">Bluetooth<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='bluetooth' placeholder='Enter The Bluetooth Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='bluetooth' placeholder='Enter The Bluetooth Configuration' required autoComplete='off' />
                                 </div>
                             </div>
                         </div>
@@ -245,30 +245,30 @@ const AddInventoryItem = () => {
                             <h4 className='mb-3 font-semibold text-xl'>Ports, Connectors & Slots</h4>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="usb">USB(s)<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='usb' placeholder='Enter The USB Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='usb' placeholder='Enter The USB Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="audioJack">Audio Jack Combo<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='audioJack' placeholder='Enter The Audio Jack Configuration' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='audioJack' placeholder='Enter The Audio Jack Configuration' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="hdmi">HDMI<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='hdmi' placeholder='Enter The HDMI Configuration' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='hdmi' placeholder='Enter The HDMI Configuration' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="ssdType">Supported SSD Type</label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='ssdType' placeholder='Enter The SSD Configuration' />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='ssdType' placeholder='Enter The SSD Configuration' autoComplete='off' />
                                 </div>
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="extraRamSlot">Extra RAM Slot</label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='extraRamSlot' placeholder='Enter The Extra RAM Slot Configuration' />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='extraRamSlot' placeholder='Enter The Extra RAM Slot Configuration' autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="extraM2Slot">Extra M.2 Slot</label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='extraM2Slot' placeholder='Enter The Extra M.2 Slot Configuration' />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='extraM2Slot' placeholder='Enter The Extra M.2 Slot Configuration' autoComplete='off' />
                                 </div>
                             </div>
                         </div>
@@ -276,16 +276,16 @@ const AddInventoryItem = () => {
                             <h4 className='mb-3 font-semibold text-xl'>Physical Specification</h4>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="dimensions">Dimensions (W x D x H)<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='dimensions' placeholder='Enter The Dimensions' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='dimensions' placeholder='Enter The Dimensions' required autoComplete='off' />
                             </div>
                             <div className='mb-5 text-left flex flex-col md:flex-row'>
                                 <div className='md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="weight">Weight<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='weight' placeholder='Enter The Weight' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='weight' placeholder='Enter The Weight' required autoComplete='off' />
                                 </div>
                                 <div className='mt-5 md:mt-0 md:ml-5 md:w-1/2'>
                                     <label className='ml-2 text-lg' htmlFor="color">Color(s)<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='color' placeholder='Enter The Colors Available' required />
+                                    <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='color' placeholder='Enter The Colors Available' required autoComplete='off' />
                                 </div>
                             </div>
                         </div>
@@ -293,7 +293,7 @@ const AddInventoryItem = () => {
                             <h4 className='mb-3 font-semibold text-xl'>Warranty</h4>
                             <div className='mb-5 text-left'>
                                 <label className='ml-2 text-lg' htmlFor="warranty">Manufacturing Warranty<span className='font-bold text-red-600 text-xl'>*</span></label>
-                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='warranty' placeholder='Enter The Warranty Information' required />
+                                <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="text" name='warranty' placeholder='Enter The Warranty Information' required autoComplete='off' />
                             </div>
                         </div>
                         <div className='mt-14 mb-5'>
