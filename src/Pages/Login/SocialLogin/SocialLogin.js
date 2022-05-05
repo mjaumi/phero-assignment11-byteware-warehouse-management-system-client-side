@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 import Loading from '../../Shared/Loading/Loading';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SocialLogin = () => {
     //integration of React Firebase hooks here
@@ -18,12 +19,24 @@ const SocialLogin = () => {
 
     const from = location.state?.from?.pathname || '/';
 
-    if (user) {
-        toast('LogIn Successful!!!', {
-            position: 'bottom-right'
-        });
-        navigate(from, { replace: true });
-    }
+    //Generating JWT when logged in with google
+    useEffect(() => {
+
+        const generateToken = async () => {
+            if (user) {
+                //fetching JWT token
+                const { data } = await axios.post('https://guarded-cove-25404.herokuapp.com/getToken', { email: user.user.email });
+
+                localStorage.setItem('accessToken', data.accessToken);
+                toast('LogIn Successful!!!', {
+                    position: 'bottom-right'
+                });
+                navigate(from, { replace: true });
+            }
+        }
+        generateToken();
+
+    }, [from, navigate, user]);
 
     if (loading) {
 
