@@ -15,11 +15,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     //integration of React Firebase hooks here
-    const [user, loading] = useAuthState(auth);
-
-    if (loading) {
-
-    }
+    const [user] = useAuthState(auth);
 
     const handleSignOut = () => {
         signOut(auth);
@@ -47,6 +43,7 @@ const Header = () => {
                                 <CustomLink to='/manageInventory'>Manage Items</CustomLink>
                                 <CustomLink to='/addInventoryItem'>Add Items</CustomLink>
                                 <CustomLink to='/myItems'>My Items</CustomLink>
+                                <CustomLink to='/profile'>Profile</CustomLink>
                                 <p className='mt-5 md:mt-0 md:ml-5 font-bold text-lg text-gray-400'>{user.displayName}</p>
                                 <button
                                     onClick={handleSignOut}
