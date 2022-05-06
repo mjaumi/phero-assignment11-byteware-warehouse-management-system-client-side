@@ -5,6 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import useProfile from '../../hooks/useProfile';
 import Item from '../Shared/Item/Item';
 import Loading from '../Shared/Loading/Loading';
 import PageTitle from '../Shared/PageTitle/PageTitle';
@@ -21,6 +22,9 @@ const MyItems = () => {
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const navigate = useNavigate();
+
+    //integration of custom hooks here
+    const [profile] = useProfile(user);
 
     //scroll to the top on render
     useEffect(() => {
@@ -72,6 +76,11 @@ const MyItems = () => {
         setShowDeleteLoading(true);
         const url = `https://guarded-cove-25404.herokuapp.com/deleteItem/${id}`;
         await axios.delete(url);
+
+        const updatedProfile = { ...profile, 'deleted': profile.deleted + 1 };
+
+        const updateProfileURL = `https://guarded-cove-25404.herokuapp.com/updateProfile/${profile._id}`;
+        await axios.put(updateProfileURL, updatedProfile);
 
         toast('Successfully Deleted Item!!!', {
             position: 'bottom-right'

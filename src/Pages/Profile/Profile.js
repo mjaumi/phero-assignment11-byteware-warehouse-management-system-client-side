@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faTruckLoading, faEdit, faMailForward, faMultiply, faBan, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { useAuthState, useSendEmailVerification, useSendPasswordResetEmail, useU
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading/Loading';
+import useProfile from '../../hooks/useProfile';
 
 const Profile = () => {
     //integration of React Firebase hooks here
@@ -18,6 +19,14 @@ const Profile = () => {
     //integration of React hooks here
     const [showEditNameModal, setShowEditNameModal] = useState(false);
     const newNameRef = useRef();
+
+    //integration of custom hooks here
+    const [profile] = useProfile(user);
+
+    //scroll to the top on render
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     //handling update profile name event
     const handleUpdateProfileName = async () => {
@@ -75,50 +84,57 @@ const Profile = () => {
                 <p className='md:text-left'>Email: {user.email}</p>
                 <div className='my-12'>
                     <h4 className='md:text-left font-semibold text-2xl mb-5'>Profile Overview</h4>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-28'>
-                        <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-byte-shadow cursor-pointer hover:scale-125 duration-300'>
-                            <PlusCircleIcon className='w-14 h-14 text-byteware-light-red' />
-                            <h2 className='mt-5 font-extrabold text-4xl'>10</h2>
-                            <p className='text-byteware-dark-gray'>Laptops Added</p>
-                        </div>
-                        <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-byte-shadow cursor-pointer hover:scale-125 duration-300'>
-                            <FontAwesomeIcon icon={faTrashCan} className='w-14 h-14 text-byteware-light-red' />
-                            <h2 className='mt-5 font-extrabold text-4xl'>3</h2>
-                            <p className='text-byteware-dark-gray'>Laptops Deleted</p>
-                        </div>
-                        <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-byte-shadow cursor-pointer hover:scale-125 duration-300'>
-                            <FontAwesomeIcon icon={faTruckLoading} className='w-14 h-14 text-byteware-light-red' />
-                            <h2 className='mt-5 font-extrabold text-4xl'>45</h2>
-                            <p className='text-byteware-dark-gray'>Laptops Delivered</p>
-                        </div>
-                    </div>
+                    {
+                        Object.keys(profile).length === 0 ?
+                            <div className='h-[20vh] flex items-center justify-center'>
+                                <Loading />
+                            </div>
+                            :
+                            <div className='grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-28'>
+                                <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-byte-shadow cursor-pointer hover:scale-125 duration-300'>
+                                    <PlusCircleIcon className='w-14 h-14 text-byteware-light-red' />
+                                    <h2 className='mt-5 font-extrabold text-4xl'>{profile.added}</h2>
+                                    <p className='text-byteware-dark-gray'>Items Added</p>
+                                </div>
+                                <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-byte-shadow cursor-pointer hover:scale-125 duration-300'>
+                                    <FontAwesomeIcon icon={faTrashCan} className='w-14 h-14 text-byteware-light-red' />
+                                    <h2 className='mt-5 font-extrabold text-4xl'>{profile.deleted}</h2>
+                                    <p className='text-byteware-dark-gray'>Items Deleted</p>
+                                </div>
+                                <div className='flex flex-col items-center bg-byteware-white p-7 rounded-2xl shadow-byte-shadow cursor-pointer hover:scale-125 duration-300'>
+                                    <FontAwesomeIcon icon={faTruckLoading} className='w-14 h-14 text-byteware-light-red' />
+                                    <h2 className='mt-5 font-extrabold text-4xl'>{profile.delivered}</h2>
+                                    <p className='text-byteware-dark-gray'>Laptops Delivered</p>
+                                </div>
+                            </div>
+                    }
                 </div>
                 <div className='my-12'>
                     <h4 className='md:text-left font-semibold text-2xl mb-5'>Manage Profile</h4>
                     <div>
-                        <div className='flex justify-between items-center border-b border-gray-300 p-2'>
-                            <p className='text-xl text-gray-400'>Profile Name: <span className='text-black font-semibold'>{user.displayName}</span></p>
+                        <div className='flex flex-col md:flex-row justify-between items-center border-b border-gray-300 p-2'>
+                            <p className='text-xl text-gray-400 mt-4 md:mt-0'>Profile Name: <span className='text-black font-semibold'>{user.displayName}</span></p>
                             <button
                                 onClick={() => setShowEditNameModal(true)}
-                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed'>
+                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed my-4 md:my-0'>
                                 <FontAwesomeIcon icon={faEdit} className='mr-3' />
                                 Edit Name
                             </button>
                         </div>
-                        <div className='flex justify-between items-center border-b border-gray-300 p-2'>
-                            <p className='text-xl text-gray-400'>Email Verification Status: <span className={`font-semibold ${user.emailVerified ? 'text-green-700' : 'text-red-700'}`}>{user.emailVerified ? 'Verified' : 'Not Verified'}</span></p>
+                        <div className='flex flex-col md:flex-row justify-between items-center border-b border-gray-300 p-2'>
+                            <p className='text-xl text-gray-400 mt-4 md:mt-0'>Email Verification Status: <span className={`font-semibold ${user.emailVerified ? 'text-green-700' : 'text-red-700'}`}>{user.emailVerified ? 'Verified' : 'Not Verified'}</span></p>
                             <button
                                 onClick={handleVerifyEmail}
-                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed' disabled={user.emailVerified}>
+                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed my-4 md:my-0' disabled={user.emailVerified}>
                                 <FontAwesomeIcon icon={faMailForward} className='mr-3' />
                                 Verify Email
                             </button>
                         </div>
-                        <div className='flex justify-between items-center border-b border-gray-300 p-2'>
-                            <p className='text-xl text-gray-400'>Password: <span className='text-black font-semibold'>••••••••••••••••••</span></p>
+                        <div className='flex flex-col md:flex-row justify-between items-center border-b border-gray-300 p-2'>
+                            <p className='text-xl text-gray-400 mt-4 md:mt-0'>Password: <span className='text-black font-semibold'>••••••••••••••••••</span></p>
                             <button
                                 onClick={handleChangePassword}
-                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed'>
+                                className='w-4/5 md:w-fit bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300 disabled:opacity-30 disabled:cursor-not-allowed my-4 md:my-0'>
                                 <FontAwesomeIcon icon={faMailForward} className='mr-3' />
                                 Change Password
                             </button>

@@ -34,7 +34,7 @@ const Header = () => {
                 <div className='md:hidden'>
                     <MenuIcon onClick={() => setShowMenu(!showMenu)} className='w-10 h-10 text-byteware-base-red' />
                 </div>
-                <div className={`absolute ${showMenu ? 'top-[40px]' : '-top-[450px]'} left-0 -z-[1000] md:z-0 md:static w-full md:w-fit bg-byteware-white duration-300 ease-in-out pb-5 md:pb-0 shadow-xl md:shadow-none`}>
+                <div className={`absolute ${showMenu ? 'top-[40px]' : '-top-[500px]'} left-0 -z-[1000] md:z-0 md:static w-full md:w-fit bg-byteware-white duration-300 ease-in-out pb-5 md:pb-0 shadow-xl md:shadow-none`}>
                     <nav className='font-semibold flex flex-col md:flex-row items-center pt-14 md:pt-0'>
                         <CustomLink to='/'>Home</CustomLink>
                         <CustomLink to='/blogs'>Blogs</CustomLink>

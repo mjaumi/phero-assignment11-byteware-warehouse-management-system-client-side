@@ -18,6 +18,7 @@
 - There is a page named **Add Inventory Items** where user can add inventory item by simply filling up the given form.
 - There is a page named **My Items** where user can see those inventory items which he/she added.
 - User can delete any existing inventory items by clicking on the **Delete** button in the **Manage Inventory** page or the **My Items** page.
+- User can see his/her private information in the **Profile** page.
 - In order to **see, add, delete or update** items, user must be **logged in** to the website.
 - A **JSON Web Token** is implemented in the **My Items** page to secure the API.
 - While loading data, a **Spinner** will be shown to the user.

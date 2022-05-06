@@ -7,6 +7,9 @@ import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading/Loading';
 import axios from 'axios';
 import useOverview from '../../hooks/useOverview';
+import useProfile from '../../hooks/useProfile';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Inventory = () => {
     //integration of React hooks
@@ -17,8 +20,12 @@ const Inventory = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
+    //integration of React Firebase hooks here
+    const [user] = useAuthState(auth);
+
     //integration of custom hooks
     const [overview] = useOverview();
+    const [profile] = useProfile(user);
 
     //scroll to the top on render
     useEffect(() => {
@@ -69,9 +76,14 @@ const Inventory = () => {
 
             const updateOverviewURL = `https://guarded-cove-25404.herokuapp.com/updateOverview/${overview._id}`;
             await axios.put(updateOverviewURL, { totalCustomers, laptopSold, revenue });
+
+            const updatedProfile = { ...profile, 'delivered': profile.delivered + 1 };
+
+            const updateProfileURL = `https://guarded-cove-25404.herokuapp.com/updateProfile/${profile._id}`;
+            await axios.put(updateProfileURL, updatedProfile);
         }
 
-        //setItem(data);
+
         toast('Updated Stock Successfully!!!', {
             position: 'bottom-right'
         });

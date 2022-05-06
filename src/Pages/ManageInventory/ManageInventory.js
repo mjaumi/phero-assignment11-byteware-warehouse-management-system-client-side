@@ -9,6 +9,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../Shared/Loading/Loading';
 import axios from 'axios';
 import Pagination from '../Shared/Pagination/Pagination';
+import useProfile from '../../hooks/useProfile';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const ManageInventory = () => {
     //integration of React hooks
@@ -20,8 +23,12 @@ const ManageInventory = () => {
     const { brand } = useParams();
     const navigate = useNavigate();
 
+    //integration of React Firebase hooks here
+    const [user] = useAuthState(auth);
+
     //integration of custom hooks
     const [items, setItems] = useItems(brand, currentPage, 6);
+    const [profile] = useProfile(user);
 
     //scroll to the top on render
     useEffect(() => {
@@ -76,6 +83,11 @@ const ManageInventory = () => {
         setShowLoading(true);
         const url = `https://guarded-cove-25404.herokuapp.com/deleteItem/${id}`;
         await axios.delete(url);
+
+        const updatedProfile = { ...profile, 'deleted': profile.deleted + 1 };
+
+        const updateProfileURL = `https://guarded-cove-25404.herokuapp.com/updateProfile/${profile._id}`;
+        await axios.put(updateProfileURL, updatedProfile);
 
         toast('Successfully Deleted Item!!!', {
             position: 'bottom-right'

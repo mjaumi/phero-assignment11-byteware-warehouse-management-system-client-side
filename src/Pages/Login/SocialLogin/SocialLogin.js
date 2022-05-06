@@ -32,6 +32,18 @@ const SocialLogin = () => {
                     position: 'bottom-right'
                 });
                 navigate(from, { replace: true });
+
+                console.log(user);
+                if (user.user.metadata.creationTime === user.user.metadata.lastSignInTime) {
+                    const newProfile = {
+                        'email': user.user.email,
+                        'added': 0,
+                        'deleted': 0,
+                        'delivered': 0
+                    }
+
+                    await axios.post('https://guarded-cove-25404.herokuapp.com/userProfile', newProfile);
+                }
             }
         }
         generateToken();

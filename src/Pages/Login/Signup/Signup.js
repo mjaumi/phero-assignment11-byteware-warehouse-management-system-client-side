@@ -8,6 +8,7 @@ import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateP
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 import Loading from '../../Shared/Loading/Loading';
+import axios from 'axios';
 
 const Signup = () => {
     //integration of React Firebase hooks here
@@ -69,6 +70,15 @@ const Signup = () => {
             await createUserWithEmailAndPassword(email, password);
             await updateProfile({ displayName });
             await sendEmailVerification();
+
+            const newProfile = {
+                email,
+                'added': 0,
+                'deleted': 0,
+                'delivered': 0
+            }
+
+            await axios.post('https://guarded-cove-25404.herokuapp.com/userProfile', newProfile);
 
             event.target.reset();
             window.scrollTo(0, 0);

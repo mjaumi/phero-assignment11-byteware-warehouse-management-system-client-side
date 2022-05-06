@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import axios from 'axios';
+import useProfile from '../../hooks/useProfile';
 
 const AddInventoryItem = () => {
     //integration of React hooks
@@ -15,6 +16,9 @@ const AddInventoryItem = () => {
 
     //integration of React Firebase hooks here
     const [user, loading] = useAuthState(auth);
+
+    //integration of custom hooks here
+    const [profile] = useProfile(user);
 
     if (loading) {
         setShowLoading(true);
@@ -110,6 +114,11 @@ const AddInventoryItem = () => {
         setShowLoading(true);
 
         await axios.post('https://guarded-cove-25404.herokuapp.com/addNewItem', newItem);
+
+        const updatedProfile = { ...profile, 'added': profile.added + 1 };
+
+        const url = `https://guarded-cove-25404.herokuapp.com/updateProfile/${profile._id}`;
+        await axios.put(url, updatedProfile);
 
         toast('Item Added Successfully!!!', {
             position: 'bottom-right'
