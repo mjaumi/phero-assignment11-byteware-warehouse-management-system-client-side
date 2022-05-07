@@ -33,7 +33,7 @@ const InventoryItems = () => {
                     <button
                         onClick={() => navigate('/manageInventory')}
                         className='font-semibold text-xl text-byteware-light-red hover:opacity-60 duration-300'>
-                        Mange Inventories
+                        Manage Inventories
                         <ArrowRightIcon className='ml-2 w-5 h-5 inline' />
                     </button>
                 </div>

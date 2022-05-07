@@ -113,7 +113,7 @@ const ManageInventory = () => {
                             onClick={() => navigate('/addInventoryItem')}
                             className='bg-gradient-to-r from-byteware-base-red to-byteware-light-red px-8 py-3 rounded-xl font-semibold text-byteware-white hover:drop-shadow-byteware-btn-shadow hover:opacity-80 duration-300'>
                             <FontAwesomeIcon icon={faCirclePlus} className='mr-3' />
-                            Add New Items
+                            Add New Item
                         </button>
                     </div>
                 </div>

@@ -94,11 +94,11 @@ const Login = () => {
                         </div>
                         <div className='mb-5 text-left'>
                             <label className='ml-2 text-lg' htmlFor="email">Email<span className='font-bold text-red-600 text-xl'>*</span></label>
-                            <input ref={emailRef} className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="email" name='email' placeholder='Enter Your Email' required autoComplete='off' />
+                            <input ref={emailRef} className='focus:border-black duration-300 outline-none border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="email" name='email' placeholder='Enter Your Email' required autoComplete='off' />
                         </div>
                         <div className='mb-2 text-left'>
                             <label className='ml-2 text-lg' htmlFor="password">Password<span className='font-bold text-red-600 text-xl'>*</span></label>
-                            <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="password" name='password' placeholder='Enter Your Password' required />
+                            <input className='focus:border-black duration-300 outline-none border-2 border-byteware-base-red rounded-lg w-full px-5 py-2 font-semibold' type="password" name='password' placeholder='Enter Your Password' required />
                         </div>
                         <div>
                             <p className='text-red-600'>{logInError && 'Invalid Email Or Password'}</p>

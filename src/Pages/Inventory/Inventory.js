@@ -383,7 +383,7 @@ const Inventory = () => {
                                 <h3 className='font-bold text-2xl text-left pt-5 mb-5'>Restock The Item</h3>
                                 <form onSubmit={handleRestockItem}>
                                     <div className='mb-5'>
-                                        <input className='border-2 border-byteware-base-red rounded-lg w-full px-5 py-3 font-semibold' type="number" name='quantity' placeholder='Enter Quantity' required />
+                                        <input className='focus:border-black duration-300 outline-none border-2 border-byteware-base-red rounded-lg w-full px-5 py-3 font-semibold' type="number" name='quantity' placeholder='Enter Quantity' required />
                                     </div>
                                     <button
                                         onClick={() => setShowRestockModal(true)}
