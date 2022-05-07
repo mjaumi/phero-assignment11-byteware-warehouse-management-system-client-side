@@ -41,16 +41,33 @@ const Signup = () => {
         }
     }, [creationError, updatingError, verificationError]);
 
-    if (user && !showToast) {
-        toast('User Created Successfully!!!', {
-            position: 'bottom-right'
-        });
-        toast('A Verification Email Is Sent. Please, Check Your Email.', {
-            position: 'bottom-right'
-        });
-        setShowToast(true);
-        navigate(from, { replace: true });
-    }
+
+    useEffect(() => {
+        if (user && !showToast) {
+            toast('User Created Successfully!!!', {
+                position: 'bottom-right'
+            });
+            toast('A Verification Email Is Sent. Please, Check Your Email.', {
+                position: 'bottom-right'
+            });
+
+            const createNewProfile = async () => {
+                const newProfile = {
+                    'email': user.user.email,
+                    'added': 0,
+                    'deleted': 0,
+                    'delivered': 0
+                }
+
+                await axios.post('https://guarded-cove-25404.herokuapp.com/userProfile', newProfile);
+            }
+
+            createNewProfile();
+            setShowToast(true);
+            navigate(from, { replace: true });
+        }
+
+    }, [from, navigate, showToast, user]);
 
     //scroll to the top on render
     useEffect(() => {
@@ -70,15 +87,6 @@ const Signup = () => {
             await createUserWithEmailAndPassword(email, password);
             await updateProfile({ displayName });
             await sendEmailVerification();
-
-            const newProfile = {
-                email,
-                'added': 0,
-                'deleted': 0,
-                'delivered': 0
-            }
-
-            await axios.post('https://guarded-cove-25404.herokuapp.com/userProfile', newProfile);
 
             event.target.reset();
             window.scrollTo(0, 0);
