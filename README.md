@@ -1,7 +1,7 @@
 # Byteware Warehouse Management System
 
 ### Live Website Link: [https://byteware-warehouse-management.web.app](https://byteware-warehouse-management.web.app)
-### Server Side Link: [ByteWare Server](https://github.com/mjaumi/phero-assignment11-byteware-warehouse-management-system-client-side)
+### Server Side Link: [ByteWare Server](https://github.com/mjaumi/phero-assignment11-byteware-warehouse-management-system-server-side)
 
 ## Project Description
 
